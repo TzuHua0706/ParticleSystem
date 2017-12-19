@@ -10,7 +10,10 @@
 #define FALLING_TIME 2.5f
 #define MAX_HEIGHT 720.0f
 #define PIXEL_PERM (2.0f*MAX_HEIGHT/(9.8f*FALLING_TIME*FALLING_TIME))
-#define GRAVITY_Y(t,dt,g) ((g)*(t+0.5f*(dt)))  //已經經過 t 秒後，再經過 dt 時間內落下距離
+#define GRAVITY_Y(t,dt,g) ((g)*(t+0.5f*(dt)))  //已經經過 t 秒後，再經過 dt 
+
+#define WIND_X(t,dt,wind,dir) (wind*((cosf(dir)*dt)))
+#define WIND_Y(t,dt,wind,dir) (wind*((sinf(dir)*dt)))
 
 #define LIFE_NOISE(f) ((f)*(1.0f-(rand()%2001/1000.0f)))
 //#define INTENSITY(f)  ( (f) >= 255 ? 255 : (f) )
@@ -26,6 +29,8 @@ USING_NS_CC;
 CParticle::CParticle()
 {
 	_fGravity = 0;
+	_fWindDirection = 0;
+	_fWind = 0;
 }
 
 
@@ -181,11 +186,14 @@ bool CParticle::doStep(float dt)
 			_Particle->setOpacity(_fOpacity * cost);
 			_Particle->setColor(Color3B(INTENSITY(_color.r*(1 + sint)), INTENSITY(_color.g*(1 + sint)), INTENSITY(_color.b*(1 + sint))));
 //			_Particle->setColor(_color);
-			_Pos.x += _Direction.x * _fVelocity * dt * PIXEL_PERM;
-			float tt = GRAVITY_Y(_fElapsedTime, dt, _fGravity);
-			_Pos.y += (_Direction.y * _fVelocity + tt)* dt * PIXEL_PERM;
-			_Particle->setPosition(_Pos);
 
+			float wind_x = WIND_X(_fElapsedTime, dt, _fWind, _fWindDirection);
+			_Pos.x += (_Direction.x * _fVelocity + wind_x) * dt * PIXEL_PERM;
+			float tt = GRAVITY_Y(_fElapsedTime, dt, _fGravity);
+			float wind_y = WIND_Y(_fElapsedTime, dt, _fWind, _fWindDirection);
+			_Pos.y += (_Direction.y * _fVelocity + tt + wind_y)* dt * PIXEL_PERM;
+			_Particle->setPosition(_Pos);
+			
 			float degree = _fSpin * _fElapsedTime;
 			_Particle->setRotation(degree);
 
@@ -357,4 +365,10 @@ void CParticle::setOpacity(const float fOpacity)
 void CParticle::setSprite(const char *pngName)
 {
 	_Particle->setSpriteFrame(pngName);
+}
+
+void CParticle::setWind(const float wind, const float windDir)
+{
+	_fWindDirection = windDir;
+	_fWind = wind * 50.0f;
 }

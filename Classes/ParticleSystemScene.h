@@ -26,6 +26,8 @@ private:
 	cocos2d::ui::TextBMFont *_ColorGBMValue;
 	cocos2d::ui::TextBMFont *_ColorBBMValue;
 	cocos2d::ui::TextBMFont *_SpriteBMValue;
+	cocos2d::ui::TextBMFont *_WindDirectionBMValue;
+	cocos2d::ui::TextBMFont *_WindBMValue;
 
 	// 選擇不同的分子型態，用在 Emitter 沒有開啟的狀態
 	cocos2d::ui::TextBMFont *_TypeBMValue;
@@ -67,6 +69,8 @@ public:
 	void ColorGEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void ColorBEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void SpriteEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
+	void WindDirectionEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
+	void WindEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void TypeEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 
     // implement the "static create()" method manually

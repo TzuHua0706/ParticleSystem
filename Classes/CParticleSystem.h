@@ -35,6 +35,8 @@ public:
 	int     _iGreen;
 	int     _iBlue;
 	char *  _cSprite;
+	float   _fWindDirection;
+	float   _fWind;
 	float   _fElpasedTime;	// 經過多少時間，以秒為單位，作為成生分子的計算依據
 	cocos2d::Point _windDir;  // 風的方向，本範例沒有實作
 
@@ -45,6 +47,8 @@ public:
 	void setEmitter(bool bEm);
 	void setGravity(float fGravity);
 	void setSprite(const char *pngName);
+	void setWindDirection(float fWindDir);
+	void setWind(float fWind);
 	void setType(int type) { _iType = type; }
 
  //   void onTouchesEnded(const cocos2d::CCPoint &touchPoint);

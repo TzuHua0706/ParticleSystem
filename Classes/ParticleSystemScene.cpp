@@ -149,6 +149,18 @@ bool ParticleSystemScene::init()
 	SpriteSlider->setMaxPercent(100); 	// 將 0 到 100 對應到 0 到 6 之間
 	_SpriteBMValue = (cocos2d::ui::TextBMFont *)rootNode->getChildByName("SpriteBMFont");
 
+	// Slider of WindDirection
+	auto *WindDirectionSlider = (cocos2d::ui::Slider *)(rootNode->getChildByName("Slider_WindDirection"));
+	WindDirectionSlider->addEventListener(CC_CALLBACK_2(ParticleSystemScene::WindDirectionEvent, this));
+	WindDirectionSlider->setMaxPercent(100); 	// 將 0 到 100 對應到 0 到 360 之間
+	_WindDirectionBMValue = (cocos2d::ui::TextBMFont *)rootNode->getChildByName("WindDirectionBMFont");
+
+	// Slider of Wind
+	auto *WindSlider = (cocos2d::ui::Slider *)(rootNode->getChildByName("Slider_Wind"));
+	WindSlider->addEventListener(CC_CALLBACK_2(ParticleSystemScene::WindEvent, this));
+	WindSlider->setMaxPercent(100); 	// 將 0 到 100 對應到 0 到 10 之間
+	_WindBMValue = (cocos2d::ui::TextBMFont *)rootNode->getChildByName("WindBMFont");
+
 	// Slider of Type
 	auto *TypeSlider = (cocos2d::ui::Slider *)(rootNode->getChildByName("Slider_Type"));
 	TypeSlider->addEventListener(CC_CALLBACK_2(ParticleSystemScene::TypeEvent, this));
@@ -378,6 +390,32 @@ void ParticleSystemScene::SpriteEvent(cocos2d::Ref* sender, cocos2d::ui::Slider:
 			_ParticleControl._cSprite = Sprite_6;
 			break;
 		}
+	}
+}
+
+void ParticleSystemScene::WindDirectionEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type)
+{
+	if (type == Slider::EventType::ON_PERCENTAGE_CHANGED)
+	{
+		Slider* slider = dynamic_cast<Slider*>(sender);
+		int percent = slider->getPercent();
+		float fWindDir = percent*3.6f; // 0 到 360 之間
+		_WindDirectionBMValue->setString(StringUtils::format("%2.1f", fWindDir));
+		_ParticleControl._fWindDirection = fWindDir;
+		_ParticleControl.setWindDirection(fWindDir);
+	}
+}
+
+void ParticleSystemScene::WindEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type)
+{
+	if (type == Slider::EventType::ON_PERCENTAGE_CHANGED)
+	{
+		Slider* slider = dynamic_cast<Slider*>(sender);
+		int percent = slider->getPercent();
+		float fWind = percent / 10.0f; // 0 到 10 之間
+		_WindBMValue->setString(StringUtils::format("%2.1f", fWind));
+		_ParticleControl._fWind = fWind;
+		_ParticleControl.setWind(fWind);
 	}
 }
 

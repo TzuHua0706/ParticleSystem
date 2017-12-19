@@ -50,6 +50,7 @@ void CParticleSystem::doStep(float dt)
 					get->setSize(0.125f);
 					get->setColor(Color3B(_iRed, _iGreen, _iBlue));
 					get->setSprite(_cSprite);
+					get->setWind(_fWind, _fWindDirection);
 					// 根據 _fSpread 與 _vDir 產生方向
 					float t = (rand() % 1001) / 1000.0f; // 產生介於 0 到 1 間的數
 					t = _fSpread - t * _fSpread * 2; //  產生的角度，轉成弧度
@@ -103,6 +104,26 @@ void CParticleSystem::setSprite(const char *pngName) {
 	if (_iInUsed != 0) { // 有分子需要更新時
 		for (it = _InUsedList.begin(); it != _InUsedList.end(); it++) {
 			(*it)->setSprite(pngName);
+		}
+	}
+}
+
+void CParticleSystem::setWindDirection(float fWindDir) {
+	_fWindDirection = fWindDir;
+	list <CParticle *>::iterator it;
+	if (_iInUsed != 0) { // 有分子需要更新時
+		for (it = _InUsedList.begin(); it != _InUsedList.end(); it++) {
+			(*it)->setWind(_fWind, _fWindDirection);
+		}
+	}
+}
+
+void CParticleSystem::setWind(float fWind) {
+	_fWind = fWind;
+	list <CParticle *>::iterator it;
+	if (_iInUsed != 0) { // 有分子需要更新時
+		for (it = _InUsedList.begin(); it != _InUsedList.end(); it++) {
+			(*it)->setWind(_fWind, _fWindDirection);
 		}
 	}
 }
