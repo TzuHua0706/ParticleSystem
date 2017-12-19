@@ -185,6 +185,10 @@ bool CParticle::doStep(float dt)
 			float tt = GRAVITY_Y(_fElapsedTime, dt, _fGravity);
 			_Pos.y += (_Direction.y * _fVelocity + tt)* dt * PIXEL_PERM;
 			_Particle->setPosition(_Pos);
+
+			float degree = _fSpin * _fElapsedTime;
+			_Particle->setRotation(degree);
+
 		}
 		break;
 	}
@@ -340,4 +344,17 @@ void CParticle::setGravity(const float fGravity)
 	_fGravity = fGravity;
 }
 
+void CParticle::setSpin(const float fSpin)
+{
+	_fSpin = fSpin;
+}
 
+void CParticle::setOpacity(const float fOpacity)
+{
+	_fOpacity = fOpacity;
+}
+
+void CParticle::setSprite(const char *pngName)
+{
+	_Particle->setSpriteFrame(pngName);
+}

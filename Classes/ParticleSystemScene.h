@@ -17,8 +17,15 @@ private:
 	cocos2d::ui::TextBMFont *_GravityBMValue;
 	cocos2d::ui::TextBMFont *_SpreadBMValue;
 	cocos2d::ui::TextBMFont *_DirectionBMValue;
+	cocos2d::ui::TextBMFont *_SpinBMValue;
+	cocos2d::ui::TextBMFont *_OpacityBMValue;
+	cocos2d::ui::TextBMFont *_ParticlesBMValue;
 	cocos2d::ui::TextBMFont *_SpeedBMValue;
-
+	cocos2d::ui::TextBMFont *_LifetimeBMValue;
+	cocos2d::ui::TextBMFont *_ColorRBMValue;
+	cocos2d::ui::TextBMFont *_ColorGBMValue;
+	cocos2d::ui::TextBMFont *_ColorBBMValue;
+	cocos2d::ui::TextBMFont *_SpriteBMValue;
 
 	// 選擇不同的分子型態，用在 Emitter 沒有開啟的狀態
 	cocos2d::ui::TextBMFont *_TypeBMValue;
@@ -51,9 +58,15 @@ public:
 	void GravityEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void SpreadEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void DirectionEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
+	void SpinEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
+	void OpacityEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
+	void ParticlesEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void SpeedEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
-
-
+	void LifetimeEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
+	void ColorREvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
+	void ColorGEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
+	void ColorBEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
+	void SpriteEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void TypeEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 
     // implement the "static create()" method manually

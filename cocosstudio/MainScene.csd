@@ -150,24 +150,24 @@
             <PreSize X="0.0117" Y="0.0431" />
             <LabelBMFontFile_CNB Type="Normal" Path="couriernew32.fnt" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="emitterpos" ActionTag="680231150" Tag="42" IconVisible="False" LeftMargin="908.6364" RightMargin="297.3636" TopMargin="573.1409" BottomMargin="72.8591" ctype="SpriteObjectData">
+          <AbstractNodeData Name="emitterpos" ActionTag="680231150" Tag="42" IconVisible="False" LeftMargin="9.7985" RightMargin="1196.2015" TopMargin="631.5128" BottomMargin="14.4872" ctype="SpriteObjectData">
             <Size X="74.0000" Y="74.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="945.6364" Y="109.8591" />
+            <Position X="46.7985" Y="51.4872" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7388" Y="0.1526" />
+            <PrePosition X="0.0366" Y="0.0715" />
             <PreSize X="0.0578" Y="0.1028" />
             <FileData Type="PlistSubImage" Path="emittericon1.png" Plist="particletexture.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_Emitter" ActionTag="588247588" Tag="43" IconVisible="False" LeftMargin="912.6357" RightMargin="301.3643" TopMargin="550.5860" BottomMargin="146.4140" FontSize="20" LabelText="Emitter" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_Emitter" ActionTag="588247588" Tag="43" IconVisible="False" LeftMargin="13.7977" RightMargin="1200.2024" TopMargin="608.9582" BottomMargin="88.0418" FontSize="20" LabelText="Emitter" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="66.0000" Y="23.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="945.6357" Y="157.9140" />
+            <Position X="46.7977" Y="99.5418" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7388" Y="0.2193" />
+            <PrePosition X="0.0366" Y="0.1383" />
             <PreSize X="0.0516" Y="0.0319" />
             <FontResource Type="Normal" Path="arial.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
@@ -425,13 +425,13 @@
             <PreSize X="0.0391" Y="0.0431" />
             <LabelBMFontFile_CNB Type="Normal" Path="couriernew32.fnt" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Slider_Type" ActionTag="-2068200785" Tag="74" IconVisible="False" LeftMargin="740.6457" RightMargin="289.3543" TopMargin="684.2768" BottomMargin="22.7232" TouchEnable="True" ctype="SliderObjectData">
+          <AbstractNodeData Name="Slider_Type" ActionTag="-2068200785" Tag="74" IconVisible="False" LeftMargin="732.6458" RightMargin="297.3542" TopMargin="684.2768" BottomMargin="22.7232" TouchEnable="True" ctype="SliderObjectData">
             <Size X="250.0000" Y="13.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="865.6457" Y="29.2232" />
+            <Position X="857.6458" Y="29.2232" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6763" Y="0.0406" />
+            <PrePosition X="0.6700" Y="0.0406" />
             <PreSize X="0.1953" Y="0.0181" />
             <BackGroundData Type="PlistSubImage" Path="sliderTrack.png" Plist="particletexture.plist" />
             <ProgressBarData Type="PlistSubImage" Path="sliderProgress.png" Plist="particletexture.plist" />
@@ -439,25 +439,61 @@
             <BallPressedData Type="PlistSubImage" Path="sliderballpressed.png" Plist="particletexture.plist" />
             <BallDisabledData Type="Default" Path="Default/SliderNode_Disable.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_Type" ActionTag="1689783237" Tag="75" IconVisible="False" LeftMargin="767.2938" RightMargin="467.7062" TopMargin="652.9009" BottomMargin="44.0991" FontSize="20" LabelText="Type" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_Type" ActionTag="1689783237" Tag="75" IconVisible="False" LeftMargin="759.2929" RightMargin="475.7071" TopMargin="652.9009" BottomMargin="44.0991" FontSize="20" LabelText="Type" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="45.0000" Y="23.0000" />
             <AnchorPoint ScaleX="0.7042" ScaleY="0.2595" />
-            <Position X="798.9828" Y="50.0676" />
+            <Position X="790.9819" Y="50.0676" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.6242" Y="0.0695" />
+            <PrePosition X="0.6180" Y="0.0695" />
             <PreSize X="0.0352" Y="0.0319" />
             <FontResource Type="Normal" Path="arial.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="TypeBMFont" ActionTag="79271116" Tag="76" IconVisible="False" LeftMargin="936.1542" RightMargin="328.8458" TopMargin="648.7726" BottomMargin="40.2274" LabelText="0" ctype="TextBMFontObjectData">
+          <AbstractNodeData Name="TypeBMFont" ActionTag="79271116" Tag="76" IconVisible="False" LeftMargin="928.1541" RightMargin="336.8459" TopMargin="648.7726" BottomMargin="40.2274" LabelText="0" ctype="TextBMFontObjectData">
             <Size X="15.0000" Y="31.0000" />
             <AnchorPoint ScaleX="0.5436" ScaleY="0.4726" />
-            <Position X="944.3082" Y="54.8780" />
+            <Position X="936.3081" Y="54.8780" />
             <Scale ScaleX="0.8500" ScaleY="0.8500" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.7377" Y="0.0762" />
+            <PrePosition X="0.7315" Y="0.0762" />
+            <PreSize X="0.0117" Y="0.0431" />
+            <LabelBMFontFile_CNB Type="Normal" Path="couriernew32.fnt" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Slider_Sprite" ActionTag="-2112256147" Tag="40" IconVisible="False" LeftMargin="733.6353" RightMargin="296.3647" TopMargin="49.4379" BottomMargin="657.5621" TouchEnable="True" ctype="SliderObjectData">
+            <Size X="250.0000" Y="13.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="858.6353" Y="664.0621" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6708" Y="0.9223" />
+            <PreSize X="0.1953" Y="0.0181" />
+            <BackGroundData Type="PlistSubImage" Path="sliderTrack.png" Plist="particletexture.plist" />
+            <ProgressBarData Type="PlistSubImage" Path="sliderProgress.png" Plist="particletexture.plist" />
+            <BallNormalData Type="PlistSubImage" Path="sliderballnormal.png" Plist="particletexture.plist" />
+            <BallPressedData Type="PlistSubImage" Path="sliderballpressed.png" Plist="particletexture.plist" />
+            <BallDisabledData Type="Default" Path="Default/SliderNode_Disable.png" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Text_Sprite" ActionTag="1067924527" Tag="41" IconVisible="False" LeftMargin="753.9478" RightMargin="472.0522" TopMargin="18.0594" BottomMargin="678.9406" FontSize="20" LabelText="Sprite" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="54.0000" Y="23.0000" />
+            <AnchorPoint ScaleX="0.7042" ScaleY="0.2595" />
+            <Position X="791.9746" Y="684.9091" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6187" Y="0.9513" />
+            <PreSize X="0.0422" Y="0.0319" />
+            <FontResource Type="Normal" Path="arial.ttf" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="SpriteBMFont" ActionTag="1704633414" Tag="42" IconVisible="False" LeftMargin="929.1478" RightMargin="335.8522" TopMargin="13.9297" BottomMargin="675.0703" LabelText="0" ctype="TextBMFontObjectData">
+            <Size X="15.0000" Y="31.0000" />
+            <AnchorPoint ScaleX="0.5436" ScaleY="0.4726" />
+            <Position X="937.3018" Y="689.7209" />
+            <Scale ScaleX="0.8500" ScaleY="0.8500" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.7323" Y="0.9579" />
             <PreSize X="0.0117" Y="0.0431" />
             <LabelBMFontFile_CNB Type="Normal" Path="couriernew32.fnt" Plist="" />
           </AbstractNodeData>

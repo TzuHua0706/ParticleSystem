@@ -23,7 +23,7 @@ void CParticleSystem::init(cocos2d::Layer &inlayer)
 	 // 讀入儲存多張圖片的 plist 檔
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("particletexture.plist");
 	for (int i = 0; i < NUMBER_PARTICLES; i++) {
-		_pParticles[i].setParticle("flare.png", inlayer);
+		_pParticles[i].setParticle(_cSprite, inlayer);
 		_FreeList.push_front(&_pParticles[i]);
 	}
 }
@@ -44,8 +44,12 @@ void CParticleSystem::doStep(float dt)
 					get->setVelocity(_fVelocity);
 					get->setLifetime(_fLifeTime);
 					get->setGravity(_fGravity);
+					get->setSpin(_fSpin);
+					get->setOpacity(_iOpacity);
 					get->setPosition(_emitterPt);
 					get->setSize(0.125f);
+					get->setColor(Color3B(_iRed, _iGreen, _iBlue));
+					get->setSprite(_cSprite);
 					// 根據 _fSpread 與 _vDir 產生方向
 					float t = (rand() % 1001) / 1000.0f; // 產生介於 0 到 1 間的數
 					t = _fSpread - t * _fSpread * 2; //  產生的角度，轉成弧度
@@ -94,8 +98,13 @@ void CParticleSystem::setGravity(float fGravity)
 	}
 }
 
-void CParticleSystem::setSpeed(float fSpeed) {
-	_fVelocity = fSpeed;
+void CParticleSystem::setSprite(const char *pngName) {
+	list <CParticle *>::iterator it;
+	if (_iInUsed != 0) { // 有分子需要更新時
+		for (it = _InUsedList.begin(); it != _InUsedList.end(); it++) {
+			(*it)->setSprite(pngName);
+		}
+	}
 }
 
 CParticleSystem::~CParticleSystem()

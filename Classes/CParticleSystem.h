@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 class CParticleSystem
 {
 private:
@@ -31,6 +30,11 @@ public:
 	float   _fLifeTime;	 // 分子的存活時間
 	float	_fSpin;		// 分子的旋轉量 degree/sec
 	float   _fGravity;
+	int     _iOpacity;
+	int     _iRed;
+	int     _iGreen;
+	int     _iBlue;
+	char *  _cSprite;
 	float   _fElpasedTime;	// 經過多少時間，以秒為單位，作為成生分子的計算依據
 	cocos2d::Point _windDir;  // 風的方向，本範例沒有實作
 
@@ -39,14 +43,14 @@ public:
 	void init(cocos2d::Layer &inlayer);
 	void doStep(float dt);
 	void setEmitter(bool bEm);
+	void setGravity(float fGravity);
+	void setSprite(const char *pngName);
 	void setType(int type) { _iType = type; }
-	void setSpeed(float fSpeed);
 
  //   void onTouchesEnded(const cocos2d::CCPoint &touchPoint);
     void onTouchesBegan(const cocos2d::CCPoint &touchPoint);
     void onTouchesMoved(const cocos2d::CCPoint &touchPoint);
 
-	void setGravity(float fGravity);
 };
 
 #endif

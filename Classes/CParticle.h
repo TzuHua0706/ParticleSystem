@@ -8,6 +8,14 @@
 #define HEARTSHAPE 4			// 噴射出心型的煙火
 #define BUTTERFLYSHAPE	5		// 噴射出蝴蝶外型的煙火
 
+#define Sprite_0 "flare.png"
+#define Sprite_1 "bubble.png"
+#define Sprite_2 "circle.png"
+#define Sprite_3 "cloud.png"
+#define Sprite_4 "comet.png"
+#define Sprite_5 "raindrop.png"
+#define Sprite_6 "spark.png"
+
 #define EMITTER_DEFAULT 99
 #include "cocos2d.h"
 
@@ -45,10 +53,14 @@ public:
 	void setBehavior(int iType); // 設定分子產生的起始行為模式
 	void setVisible();
 	void setGravity(const float fGravity);
+	void setSpin(const float fSpin);
+	void setOpacity(const float fOpacity);
 	void setVelocity(const float v) { _fVelocity = v; }
 	void setLifetime(const float lt);
 	void setDirection(const cocos2d::Point pt) { _Direction = pt; }
 	void setSize(float s) { _fSize = s; _Particle->setScale(_fSize); }
+	void setSprite(const char *pngName);
+
 };
 
 #endif
