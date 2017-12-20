@@ -59,6 +59,19 @@ bool ParticleSystemScene::init()
 	_emitterSwitchBtn->setButtonInfo("emitteroff.png", "emitteron.png", "emittertd.png", loc);
 	this->addChild(_emitterSwitchBtn, 2);
 
+	//Button
+	_FireworkSprite = CDraggableSprite::create();
+	_FireworkSprite->setSpriteInfo("emittericon.png", Point(-125.0f + visibleSize.width / 2.0f, visibleSize.height / 2.0f));
+	_FireworkSprite->setVisible(false);
+	_bFireworkOn = false;
+	this->addChild(_FireworkSprite, 5);
+	auto firework = (Sprite *)(rootNode->getChildByName("Firework"));
+	Point pos_fire = firework->getPosition();
+	firework->setVisible(false);
+	_fireworkBtn = CSwitchButton::create();
+	_fireworkBtn->setButtonInfo("emitteroff.png", "emitteron.png", "emittertd.png", pos_fire);
+	this->addChild(_fireworkBtn, 2);
+
 	// Particle Control System
 	// 最好的方式是，以下的 Slider 根據這裡的設定值，顯示出正確的數值與位置
 	_ParticleControl._cSprite = Sprite_0;
@@ -188,8 +201,9 @@ bool ParticleSystemScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *p
 	Point touchLoc = pTouch->getLocation();
 	//顯示 Emitter 時，可拖曳該圖式
 	if( _bEmitterOn ) _EmitterSprite->touchesBegan(touchLoc);
+	if (_bFireworkOn) _FireworkSprite->touchesBegan(touchLoc);
 	// 沒有顯示 Emitter，而且沒有按在 Emitter 切換按鈕上，才讓 touch 可以點選顯示分子
-	if ( !_emitterSwitchBtn->touchesBegan(touchLoc) && !_bEmitterOn ) _ParticleControl.onTouchesBegan(touchLoc);
+	if (!_fireworkBtn->touchesBegan(touchLoc) && !_emitterSwitchBtn->touchesBegan(touchLoc) && !_bEmitterOn) _ParticleControl.onTouchesBegan(touchLoc);
 	return true;
 }
 
@@ -200,8 +214,10 @@ void  ParticleSystemScene::onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *
 		if (_EmitterSprite->touchesMoved(touchLoc)) // 移動並更新 Emitter 的位置
 			_ParticleControl._emitterPt = _EmitterSprite->getLoc();
 	}
+	if (_bFireworkOn)
+		_FireworkSprite->touchesMoved(touchLoc);
 	// 沒有顯示 Emitter，而且沒有按在 Emitter 切換按鈕上，才讓 touch 可以點選顯示分子
-	if ( !_emitterSwitchBtn->touchesMoved(touchLoc) && !_bEmitterOn ) _ParticleControl.onTouchesMoved(touchLoc);
+	if (!_fireworkBtn->touchesMoved(touchLoc) && !_emitterSwitchBtn->touchesMoved(touchLoc) && !_bEmitterOn ) _ParticleControl.onTouchesMoved(touchLoc);
 }
 
 void  ParticleSystemScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent) //觸碰結束事件 
@@ -223,6 +239,8 @@ void  ParticleSystemScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *
 		}
 		_ParticleControl.setEmitter(_bEmitterOn); // 更新控制系統中的 Emitter 狀態
 	}
+	if (_bFireworkOn)_FireworkSprite->touchesEnded(touchLoc);
+	if (_fireworkBtn->touchesEnded(touchLoc))_bFireworkOn = _fireworkBtn->getStatus();
 }
 
 void ParticleSystemScene::GravityEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type)

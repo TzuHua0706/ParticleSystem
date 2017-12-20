@@ -36,8 +36,10 @@ private:
 	CDraggableSprite *_EmitterSprite;
 	bool _bEmitterOn;
 	CSwitchButton *_emitterSwitchBtn;
-	
 
+	CDraggableSprite *_FireworkSprite;
+	bool _bFireworkOn;
+	CSwitchButton *_fireworkBtn;
 
 public:
 

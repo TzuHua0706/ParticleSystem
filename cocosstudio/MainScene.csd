@@ -150,13 +150,13 @@
             <PreSize X="0.0117" Y="0.0431" />
             <LabelBMFontFile_CNB Type="Normal" Path="couriernew32.fnt" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="emitterpos" ActionTag="680231150" Tag="42" IconVisible="False" LeftMargin="9.7985" RightMargin="1196.2015" TopMargin="631.5128" BottomMargin="14.4872" ctype="SpriteObjectData">
+          <AbstractNodeData Name="emitterpos" ActionTag="680231150" Tag="42" IconVisible="False" LeftMargin="8.4198" RightMargin="1197.5802" TopMargin="631.5128" BottomMargin="14.4872" ctype="SpriteObjectData">
             <Size X="74.0000" Y="74.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="46.7985" Y="51.4872" />
+            <Position X="45.4198" Y="51.4872" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0366" Y="0.0715" />
+            <PrePosition X="0.0355" Y="0.0715" />
             <PreSize X="0.0578" Y="0.1028" />
             <FileData Type="PlistSubImage" Path="emittericon1.png" Plist="particletexture.plist" />
             <BlendFunc Src="1" Dst="771" />
@@ -568,6 +568,17 @@
             <PrePosition X="0.7318" Y="0.7860" />
             <PreSize X="0.0117" Y="0.0431" />
             <LabelBMFontFile_CNB Type="Normal" Path="couriernew32.fnt" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Firework" ActionTag="307026831" Tag="49" IconVisible="False" LeftMargin="8.4198" RightMargin="1197.5802" TopMargin="9.8616" BottomMargin="636.1384" ctype="SpriteObjectData">
+            <Size X="74.0000" Y="74.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="45.4198" Y="673.1384" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0355" Y="0.9349" />
+            <PreSize X="0.0578" Y="0.1028" />
+            <FileData Type="PlistSubImage" Path="emittericon1.png" Plist="particletexture.plist" />
+            <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
