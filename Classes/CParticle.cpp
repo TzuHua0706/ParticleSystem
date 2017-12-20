@@ -12,8 +12,8 @@
 #define PIXEL_PERM (2.0f*MAX_HEIGHT/(9.8f*FALLING_TIME*FALLING_TIME))
 #define GRAVITY_Y(t,dt,g) ((g)*(t+0.5f*(dt)))  //已經經過 t 秒後，再經過 dt 
 
-#define WIND_X(t,dt,wind,dir) (wind*((cosf(dir)*dt)))
-#define WIND_Y(t,dt,wind,dir) (wind*((sinf(dir)*dt)))
+#define WIND_X(t,dt,wind,dir) (wind*((sinf(dir/57.3)*(dt))))
+#define WIND_Y(t,dt,wind,dir) (wind*((cosf(dir/57.3)*(dt))))
 
 #define LIFE_NOISE(f) ((f)*(1.0f-(rand()%2001/1000.0f)))
 //#define INTENSITY(f)  ( (f) >= 255 ? 255 : (f) )

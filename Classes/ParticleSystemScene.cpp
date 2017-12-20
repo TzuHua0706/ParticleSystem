@@ -152,7 +152,7 @@ bool ParticleSystemScene::init()
 	// Slider of WindDirection
 	auto *WindDirectionSlider = (cocos2d::ui::Slider *)(rootNode->getChildByName("Slider_WindDirection"));
 	WindDirectionSlider->addEventListener(CC_CALLBACK_2(ParticleSystemScene::WindDirectionEvent, this));
-	WindDirectionSlider->setMaxPercent(100); 	// 將 0 到 100 對應到 0 到 360 之間
+	WindDirectionSlider->setMaxPercent(100); 	// 將 0 到 100 對應到 -180 到 180 之間
 	_WindDirectionBMValue = (cocos2d::ui::TextBMFont *)rootNode->getChildByName("WindDirectionBMFont");
 
 	// Slider of Wind
@@ -399,7 +399,7 @@ void ParticleSystemScene::WindDirectionEvent(cocos2d::Ref* sender, cocos2d::ui::
 	{
 		Slider* slider = dynamic_cast<Slider*>(sender);
 		int percent = slider->getPercent();
-		float fWindDir = percent*3.6f; // 0 到 360 之間
+		float fWindDir = -180 + (percent*3.6f); // -180 到 180 之間
 		_WindDirectionBMValue->setString(StringUtils::format("%2.1f", fWindDir));
 		_ParticleControl._fWindDirection = fWindDir;
 		_ParticleControl.setWindDirection(fWindDir);

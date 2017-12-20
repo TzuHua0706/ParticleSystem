@@ -353,7 +353,7 @@
             <PreSize X="0.0391" Y="0.0431" />
             <LabelBMFontFile_CNB Type="Normal" Path="couriernew32.fnt" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Slider_Blue" ActionTag="-138292921" Tag="31" IconVisible="False" LeftMargin="1003.1492" RightMargin="26.8508" TopMargin="683.3502" BottomMargin="23.6497" TouchEnable="True" PercentInfo="100" ctype="SliderObjectData">
+          <AbstractNodeData Name="Slider_Blue" ActionTag="-138292921" Tag="31" IconVisible="False" LeftMargin="1003.1492" RightMargin="26.8508" TopMargin="683.3503" BottomMargin="23.6497" TouchEnable="True" PercentInfo="100" ctype="SliderObjectData">
             <Size X="250.0000" Y="13.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="1128.1492" Y="30.1497" />
@@ -367,7 +367,7 @@
             <BallPressedData Type="PlistSubImage" Path="sliderballpressed.png" Plist="particletexture.plist" />
             <BallDisabledData Type="Default" Path="Default/SliderNode_Disable.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_Blue" ActionTag="1269976857" Tag="32" IconVisible="False" LeftMargin="1023.1767" RightMargin="216.8232" TopMargin="652.0477" BottomMargin="44.9522" FontSize="20" LabelText="Blue" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_Blue" ActionTag="1269976857" Tag="32" IconVisible="False" LeftMargin="1023.1767" RightMargin="216.8232" TopMargin="652.0478" BottomMargin="44.9522" FontSize="20" LabelText="Blue" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="40.0000" Y="23.0000" />
             <AnchorPoint ScaleX="0.7042" ScaleY="0.2595" />
             <Position X="1051.3447" Y="50.9207" />
@@ -425,7 +425,7 @@
             <PreSize X="0.0391" Y="0.0431" />
             <LabelBMFontFile_CNB Type="Normal" Path="couriernew32.fnt" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Slider_Type" ActionTag="-2068200785" Tag="74" IconVisible="False" LeftMargin="733.1401" RightMargin="296.8599" TopMargin="683.3502" BottomMargin="23.6497" TouchEnable="True" ctype="SliderObjectData">
+          <AbstractNodeData Name="Slider_Type" ActionTag="-2068200785" Tag="74" IconVisible="False" LeftMargin="733.1401" RightMargin="296.8599" TopMargin="683.3503" BottomMargin="23.6497" TouchEnable="True" ctype="SliderObjectData">
             <Size X="250.0000" Y="13.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="858.1401" Y="30.1497" />
@@ -439,7 +439,7 @@
             <BallPressedData Type="PlistSubImage" Path="sliderballpressed.png" Plist="particletexture.plist" />
             <BallDisabledData Type="Default" Path="Default/SliderNode_Disable.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_Type" ActionTag="1689783237" Tag="75" IconVisible="False" LeftMargin="753.9474" RightMargin="481.0526" TopMargin="652.0477" BottomMargin="44.9522" FontSize="20" LabelText="Type" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_Type" ActionTag="1689783237" Tag="75" IconVisible="False" LeftMargin="753.9474" RightMargin="481.0526" TopMargin="652.0478" BottomMargin="44.9522" FontSize="20" LabelText="Type" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="45.0000" Y="23.0000" />
             <AnchorPoint ScaleX="0.7042" ScaleY="0.2595" />
             <Position X="785.6364" Y="50.9207" />
@@ -475,7 +475,7 @@
             <BallPressedData Type="PlistSubImage" Path="sliderballpressed.png" Plist="particletexture.plist" />
             <BallDisabledData Type="Default" Path="Default/SliderNode_Disable.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_Sprite" ActionTag="1067924527" Tag="41" IconVisible="False" LeftMargin="753.9442" RightMargin="472.0558" TopMargin="14.4460" BottomMargin="682.5540" FontSize="20" LabelText="Sprite" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_Sprite" ActionTag="1067924527" Tag="41" IconVisible="False" LeftMargin="753.9441" RightMargin="472.0559" TopMargin="14.4460" BottomMargin="682.5540" FontSize="20" LabelText="Sprite" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="54.0000" Y="23.0000" />
             <AnchorPoint ScaleX="0.7042" ScaleY="0.2595" />
             <Position X="791.9709" Y="688.5225" />
@@ -497,7 +497,7 @@
             <PreSize X="0.0117" Y="0.0431" />
             <LabelBMFontFile_CNB Type="Normal" Path="couriernew32.fnt" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Slider_WindDirection" ActionTag="-2054859154" Tag="43" IconVisible="False" LeftMargin="733.1401" RightMargin="296.8599" TopMargin="111.7358" BottomMargin="595.2642" TouchEnable="True" ctype="SliderObjectData">
+          <AbstractNodeData Name="Slider_WindDirection" ActionTag="-2054859154" Tag="43" IconVisible="False" LeftMargin="733.1401" RightMargin="296.8599" TopMargin="111.7359" BottomMargin="595.2641" TouchEnable="True" PercentInfo="50" ctype="SliderObjectData">
             <Size X="250.0000" Y="13.0000" />
             <AnchorPoint ScaleX="0.5162" ScaleY="0.6589" />
             <Position X="862.1901" Y="603.8298" />
@@ -511,7 +511,7 @@
             <BallPressedData Type="PlistSubImage" Path="sliderballpressed.png" Plist="particletexture.plist" />
             <BallDisabledData Type="Default" Path="Default/SliderNode_Disable.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_WindDirection" ActionTag="123142300" Tag="44" IconVisible="False" LeftMargin="753.9441" RightMargin="403.0559" TopMargin="78.0984" BottomMargin="618.9016" FontSize="20" LabelText="WindDirection" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_WindDirection" ActionTag="123142300" Tag="44" IconVisible="False" LeftMargin="753.9441" RightMargin="403.0558" TopMargin="78.0984" BottomMargin="618.9016" FontSize="20" LabelText="WindDirection" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="123.0000" Y="23.0000" />
             <AnchorPoint ScaleX="0.4999" ScaleY="0.5080" />
             <Position X="815.4318" Y="630.5856" />
@@ -523,7 +523,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="WindDirectionBMFont" ActionTag="2077578210" Tag="45" IconVisible="False" LeftMargin="928.5019" RightMargin="336.4981" TopMargin="73.9710" BottomMargin="615.0290" LabelText="0" ctype="TextBMFontObjectData">
+          <AbstractNodeData Name="WindDirectionBMFont" ActionTag="2077578210" Tag="45" IconVisible="False" LeftMargin="928.5019" RightMargin="336.4981" TopMargin="73.9709" BottomMargin="615.0291" LabelText="0" ctype="TextBMFontObjectData">
             <Size X="15.0000" Y="31.0000" />
             <AnchorPoint ScaleX="0.5436" ScaleY="0.4726" />
             <Position X="936.6559" Y="629.6796" />
