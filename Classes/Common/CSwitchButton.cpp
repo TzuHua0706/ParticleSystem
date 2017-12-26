@@ -53,6 +53,17 @@ void CSwitchButton::setButtonInfo(const char *offImg, const char *onImg, const c
 	_bSwitchOn = false;
 }
 
+void CSwitchButton::Newpos(const cocos2d::Point locPt) {
+	auto _NewBtnLoc = locPt;
+	if (_NewBtnLoc == Point(0, 0)) _NewBtnLoc = _BtnLoc; //(0,0)¦^­ì¦ì
+	else { _SwitchOnPic->setZOrder(3); }
+	_SwitchOffPic->setPosition(_NewBtnLoc);
+	_SwitchTDPic->setPosition(_NewBtnLoc);
+	_SwitchOnPic->setPosition(_NewBtnLoc);
+	_BtnRect.size = _BtnSize;
+	_BtnRect.origin.x = _NewBtnLoc.x - _BtnSize.width*0.5f;
+	_BtnRect.origin.y = _NewBtnLoc.y - _BtnSize.height*0.5f;
+}
 
 bool CSwitchButton::touchesBegan(cocos2d::Point inPos)
 {

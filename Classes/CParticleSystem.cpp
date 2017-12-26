@@ -8,6 +8,7 @@ CParticleSystem::CParticleSystem()
 {
 	_fGravity = 0;
 	_bEmitterOn = false;
+	_fSize = 0.125f;
 }
 
 void CParticleSystem::setEmitter(bool bEm)
@@ -47,10 +48,16 @@ void CParticleSystem::doStep(float dt)
 					get->setSpin(_fSpin);
 					get->setOpacity(_iOpacity);
 					get->setPosition(_emitterPt);
-					get->setSize(0.125f);
+					//get->setSize(0.125f);
+					get->setSize(_fSize);
 					get->setColor(Color3B(_iRed, _iGreen, _iBlue));
 					get->setSprite(_cSprite);
 					get->setWind(_fWind, _fWindDirection);
+
+					if (_bFlowerOn) {
+						//get->setOpacity(255 - sinf(_fTime / (180 / M_PI)) * 100);
+					}
+
 					// 根據 _fSpread 與 _vDir 產生方向
 					float t = (rand() % 1001) / 1000.0f; // 產生介於 0 到 1 間的數
 					t = _fSpread - t * _fSpread * 2; //  產生的角度，轉成弧度
@@ -99,7 +106,7 @@ void CParticleSystem::setGravity(float fGravity)
 	}
 }
 
-void CParticleSystem::setSprite(const char *pngName) {
+void CParticleSystem::setSprite(char * pngName) {
 	list <CParticle *>::iterator it;
 	if (_iInUsed != 0) { // 有分子需要更新時
 		for (it = _InUsedList.begin(); it != _InUsedList.end(); it++) {
@@ -107,6 +114,7 @@ void CParticleSystem::setSprite(const char *pngName) {
 		}
 	}
 }
+
 
 void CParticleSystem::setWindDirection(float fWindDir) {
 	_fWindDirection = fWindDir;
@@ -128,6 +136,28 @@ void CParticleSystem::setWind(float fWind) {
 	}
 }
 
+void CParticleSystem::setFlower(float time, cocos2d::Point loc) {
+	_fTime = time;
+	list <CParticle *>::iterator it;
+	if (_iInUsed != 0) { // 有分子需要更新時
+		for (it = _InUsedList.begin(); it != _InUsedList.end(); it++) {
+			auto dx_0 = (loc.x - (*it)->_Pos.x);
+			auto dy_0 = (loc.y - (*it)->_Pos.y);
+			_fAngle = atan(dy_0 / dx_0) * (180 / M_PI);
+			if ((dx_0 >= 0) && (dy_0 >= 0))
+				_fAngle = _fAngle - 180;
+			if ((dx_0 < 0) && (dy_0 >= 0))
+				_fAngle = _fAngle;
+			if ((dx_0 < 0) && (dy_0 < 0))
+				_fAngle = _fAngle - 360;
+			if ((dx_0 >= 0) && (dy_0 < 0))
+				_fAngle = 180 + _fAngle;
+			(*it)->setWind(2 * sinf(time / (180 / M_PI)), _fAngle);
+			//(*it)->setOpacity(255 - sinf(time / (180 / M_PI)) * 155);
+		}
+	}
+}
+
 CParticleSystem::~CParticleSystem()
 {
 	if (_iInUsed != 0) _InUsedList.clear(); // 移除所有的 NODE
@@ -145,6 +175,7 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 		// 從 _FreeList 取得一個分子給放到 _InUsed
 		if (_iFree != 0) {
 			get = _FreeList.front();
+			get->setSprite(_cSprite);
 			get->setBehavior(STAY_FOR_TWOSECONDS);
 			get->setPosition(touchPoint);
 			get->setGravity(_fGravity);
@@ -157,6 +188,7 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 	case RANDOMS_FALLING :
 		if (_iFree != 0) {
 			get = _FreeList.front();
+			get->setSprite(_cSprite);
 			get->setBehavior(RANDOMS_FALLING);
 			get->setPosition(touchPoint);
 			get->setGravity(_fGravity);
@@ -170,6 +202,7 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 		// 從 _FreeList 取得一個分子給放到 _InUsed
 		if (_iFree != 0) {
 			get = _FreeList.front();
+			get->setSprite(_cSprite);
 			get->setBehavior(FREE_FLY);
 			get->setPosition(touchPoint);
 			get->setGravity(_fGravity);
@@ -179,11 +212,27 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 		}
 		else return;// 沒有分子, 所以就不提供
 		break;
+	case Effect4:
+		// 從 _FreeList 取得一個分子給放到 _InUsed
+		if (_iFree > 100) {
+			for (int i = 0; i < 75; i++) {
+				get = _FreeList.front();
+				get->setSprite(_cSprite);
+				get->setBehavior(Effect4);
+				get->setPosition(touchPoint);
+				_FreeList.pop_front();
+				_InUsedList.push_front(get);
+				_iFree--; _iInUsed++;
+			}
+		}
+		else return;// 沒有分子, 所以就不提供
+		break;
 	case EXPLOSION:
 		// 從 _FreeList 取得一個分子給放到 _InUsed
 		if (_iFree > 100) {
 			for (int i = 0; i < 100; i++) {
 				get = _FreeList.front();
+				get->setSprite(_cSprite);
 				get->setBehavior(EXPLOSION);
 				get->setPosition(touchPoint);
 				get->setGravity(_fGravity);
@@ -199,6 +248,7 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 		if (_iFree > 150) {
 			for (int i = 0; i < 150; i++) {
 				get = _FreeList.front();
+				get->setSprite(_cSprite);
 				get->setBehavior(HEARTSHAPE);
 				get->setPosition(touchPoint);
 				get->setGravity(_fGravity);
@@ -214,6 +264,7 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 		if (_iFree > 150) {
 			for (int i = 0; i < 150; i++) {
 				get = _FreeList.front();
+				get->setSprite(_cSprite);
 				get->setBehavior(BUTTERFLYSHAPE);
 				get->setPosition(touchPoint);
 				get->setGravity(_fGravity);
@@ -223,6 +274,48 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 			}
 		}
 		else return;// 沒有分子, 所以就不提供
+		break;
+	case OTHER_1:
+		if (_iFree > 150) {
+			for (int i = 0; i < 100; i++) {
+				get = _FreeList.front();
+				get->setSprite(_cSprite);
+				get->setBehavior(OTHER_1);
+				get->setPosition(touchPoint);
+				get->setGravity(_fGravity);
+				_FreeList.pop_front();
+				_InUsedList.push_front(get);
+				_iFree--; _iInUsed++;
+			}
+		}
+		break;
+	case OTHER_2:
+		if (_iFree > 150) {
+			for (int i = 0; i < 100; i++) {
+				get = _FreeList.front();
+				get->setSprite(_cSprite);
+				get->setBehavior(OTHER_1);
+				get->setPosition(touchPoint);
+				get->setGravity(_fGravity);
+				_FreeList.pop_front();
+				_InUsedList.push_front(get);
+				_iFree--; _iInUsed++;
+			}
+		}
+		break;
+	case OTHER_3:
+		if (_iFree > 150) {
+			for (int i = 0; i < 100; i++) {
+				get = _FreeList.front();
+				get->setSprite(_cSprite);
+				get->setBehavior(OTHER_1);
+				get->setPosition(touchPoint);
+				get->setGravity(_fGravity);
+				_FreeList.pop_front();
+				_InUsedList.push_front(get);
+				_iFree--; _iInUsed++;
+			}
+		}
 		break;
 	}
 }
@@ -269,6 +362,12 @@ void CParticleSystem::onTouchesMoved(const cocos2d::CCPoint &touchPoint)
 			_iFree--; _iInUsed++;
 		}
 		else return;// 沒有分子, 所以就不提供
+		break;
+	case OTHER_1:
+		break;
+	case OTHER_2:
+		break;
+	case OTHER_3:
 		break;
 	}
 }

@@ -7,6 +7,10 @@
 #define EXPLOSION 3				// 噴射出圓形的煙火
 #define HEARTSHAPE 4			// 噴射出心型的煙火
 #define BUTTERFLYSHAPE	5		// 噴射出蝴蝶外型的煙火
+#define OTHER_1	6
+#define OTHER_2	7
+#define OTHER_3	8
+#define Effect4	9
 
 #define Sprite_0 "flare.png"
 #define Sprite_1 "bubble.png"
@@ -24,7 +28,6 @@ class CParticle
 private:
 	cocos2d::Sprite *_Particle;	// 分子本體
 	cocos2d::Point  _OldPos;		// 分子前一個位置
-	cocos2d::Point  _Pos;			// 分子目前的位置
 	cocos2d::Point  _Direction;	// 分子目前的運動方向，單位向量
 
 	float _fVelocity;	   // 分子的速度
@@ -44,8 +47,9 @@ private:
 	int _iType;
 	// 顯示與否
 	bool _bVisible;
-	
+
 public:
+	cocos2d::Point  _Pos;			// 分子目前的位置
 	CParticle();
 	void setParticle(const char *pngName, cocos2d::Layer &inlayer);
 

@@ -5,14 +5,15 @@
 #include "ui/CocosGUI.h"
 #include "SimpleAudioEngine.h"
 #include "cocostudio/CocoStudio.h"
-#include "cparticlesystem.h"
+#include "CParticleEffects.h"
 #include "Common/CSwitchButton.h"
-#include  "Common/CDraggableSprite.h"
+#include "Common/CDraggableSprite.h"
 
 
 class ParticleSystemScene : public cocos2d::Layer
 {
 private:
+	cocos2d::Node * rootNode;
 	// 分子的可提整不同參數的顯示
 	cocos2d::ui::TextBMFont *_GravityBMValue;
 	cocos2d::ui::TextBMFont *_SpreadBMValue;
@@ -25,7 +26,6 @@ private:
 	cocos2d::ui::TextBMFont *_ColorRBMValue;
 	cocos2d::ui::TextBMFont *_ColorGBMValue;
 	cocos2d::ui::TextBMFont *_ColorBBMValue;
-	cocos2d::ui::TextBMFont *_SpriteBMValue;
 	cocos2d::ui::TextBMFont *_WindDirectionBMValue;
 	cocos2d::ui::TextBMFont *_WindBMValue;
 
@@ -37,10 +37,29 @@ private:
 	bool _bEmitterOn;
 	CSwitchButton *_emitterSwitchBtn;
 
-	CDraggableSprite *_FireworkSprite;
-	bool _bFireworkOn;
-	CSwitchButton *_fireworkBtn;
+	//分子樣式
+	bool _bSpriteOn;
+	CSwitchButton *_FlareBtn;
+	CSwitchButton *_BubbleBtn;
+	CSwitchButton *_CircleBtn;
+	CSwitchButton *_CloudBtn;
+	CSwitchButton *_CometBtn;
+	CSwitchButton *_RaindropBtn;
+	CSwitchButton *_SparkBtn;
 
+	//特效
+	bool _bEffectsOn;
+	CSwitchButton *_FireworkBtn;
+	CParticleEffects _FireworkEffect;
+	CSwitchButton *_ElveBtn;
+	CParticleEffects _ElveEffect;
+	CSwitchButton *_TornadoBtn;
+	CParticleEffects _TornadoEffect;
+	CSwitchButton *_FlowerBtn;
+	CParticleEffects _FlowerEffect;
+
+	cocos2d::Point pos_back;
+	cocos2d::Point pos_none;
 public:
 
 	CParticleSystem _ParticleControl;
@@ -70,7 +89,6 @@ public:
 	void ColorREvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void ColorGEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void ColorBEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
-	void SpriteEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void WindDirectionEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void WindEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);
 	void TypeEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type);

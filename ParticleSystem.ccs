@@ -23,10 +23,25 @@
         </PlistImageFolder>
         <TTF Name="arial.ttf" />
         <Image Name="background.png" />
+        <Project Name="Color.csd" Type="Node" />
         <Fnt Name="couriernew32.fnt" />
+        <Project Name="Direction.csd" Type="Node" />
+        <Project Name="Effects.csd" Type="Node" />
+        <Project Name="Emitter.csd" Type="Node" />
+        <Project Name="Gravity.csd" Type="Node" />
+        <Project Name="Lifetime.csd" Type="Node" />
         <Project Name="MainScene.csd" Type="Scene" />
         <TTF Name="Marker Felt.ttf" />
+        <Project Name="Opacity.csd" Type="Node" />
         <PlistParticleFile Name="particle_texture.plist" />
+        <Project Name="Particles.csd" Type="Node" />
+        <Project Name="Slider.csd" Type="Node" />
+        <Project Name="Speed.csd" Type="Node" />
+        <Project Name="Spin.csd" Type="Node" />
+        <Project Name="Spread.csd" Type="Node" />
+        <Project Name="Sprite.csd" Type="Node" />
+        <Project Name="Type.csd" Type="Node" />
+        <Project Name="Wind.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

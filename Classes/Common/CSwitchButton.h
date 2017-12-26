@@ -30,6 +30,7 @@ public:
 	bool touchesEnded(cocos2d::Point inPos); 
 	void setVisible(bool bVis);
 	void setScale(float scale);
+	void Newpos(const cocos2d::Point locPt);
 	bool getStatus();
 
 };

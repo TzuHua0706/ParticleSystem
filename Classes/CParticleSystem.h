@@ -38,7 +38,12 @@ public:
 	float   _fWindDirection;
 	float   _fWind;
 	float   _fElpasedTime;	// 經過多少時間，以秒為單位，作為成生分子的計算依據
+	float _fSize;
 	cocos2d::Point _windDir;  // 風的方向，本範例沒有實作
+	float   _fDirection;//分子運動方向
+	bool _bFlowerOn = false;
+	float _fTime;
+	float _fAngle;
 
 	CParticleSystem();
 	~CParticleSystem();
@@ -46,10 +51,12 @@ public:
 	void doStep(float dt);
 	void setEmitter(bool bEm);
 	void setGravity(float fGravity);
-	void setSprite(const char *pngName);
+	void setSprite(char *pngName);
 	void setWindDirection(float fWindDir);
 	void setWind(float fWind);
 	void setType(int type) { _iType = type; }
+
+	void setFlower(float time, cocos2d::Point loc);
 
  //   void onTouchesEnded(const cocos2d::CCPoint &touchPoint);
     void onTouchesBegan(const cocos2d::CCPoint &touchPoint);
