@@ -56,7 +56,7 @@ public:
 	void setWind(float fWind);
 	void setType(int type) { _iType = type; }
 
-	void setFlower(float time, cocos2d::Point loc);
+	void setFlower(float alltime, float time, cocos2d::Point loc, float speed);
 
  //   void onTouchesEnded(const cocos2d::CCPoint &touchPoint);
     void onTouchesBegan(const cocos2d::CCPoint &touchPoint);

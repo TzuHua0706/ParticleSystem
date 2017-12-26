@@ -136,24 +136,29 @@ void CParticleSystem::setWind(float fWind) {
 	}
 }
 
-void CParticleSystem::setFlower(float time, cocos2d::Point loc) {
+void CParticleSystem::setFlower(float alltime, float time, cocos2d::Point loc, float speed) {
 	_fTime = time;
 	list <CParticle *>::iterator it;
 	if (_iInUsed != 0) { // 有分子需要更新時
 		for (it = _InUsedList.begin(); it != _InUsedList.end(); it++) {
 			auto dx_0 = (loc.x - (*it)->_Pos.x);
 			auto dy_0 = (loc.y - (*it)->_Pos.y);
+			float dx, dy;
+			if (dx_0 < 0)dx = dx_0 * -1; else dx = dx_0;
+			if (dy_0 < 0)dy = dy_0 * -1; else dy = dy_0;
 			_fAngle = atan(dy_0 / dx_0) * (180 / M_PI);
 			if ((dx_0 >= 0) && (dy_0 >= 0))
 				_fAngle = _fAngle - 180;
-			if ((dx_0 < 0) && (dy_0 >= 0))
+			else if ((dx_0 < 0) && (dy_0 >= 0))
 				_fAngle = _fAngle;
-			if ((dx_0 < 0) && (dy_0 < 0))
+			else if ((dx_0 < 0) && (dy_0 < 0))
 				_fAngle = _fAngle - 360;
-			if ((dx_0 >= 0) && (dy_0 < 0))
+			else if ((dx_0 >= 0) && (dy_0 < 0))
 				_fAngle = 180 + _fAngle;
-			(*it)->setWind(2 * sinf(time / (180 / M_PI)), _fAngle);
-			//(*it)->setOpacity(255 - sinf(time / (180 / M_PI)) * 155);
+			if (alltime >= (dx / speed)) {
+				(*it)->setWind(1 * sinf((time / 2 + 90) / (180 / M_PI)), _fAngle);
+				//(*it)->setOpacity(255 - sinf(time / (180 / M_PI)) * 50);
+			}
 		}
 	}
 }

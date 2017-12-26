@@ -136,15 +136,13 @@ void CParticleEffects::doStep(float dt)
 		if (dx < 0)dx = dx * -1;
 		if (dy < 0)dy = dy * -1;
 		if (touch) {
-			if (time >= (dx - 220) / speedx) {
-				if (x < 180) {
-					_Particle._fSpread = 2 * sinf(x / (180 / M_PI));
-					_Particle.setFlower(x, FlowerPos);
-				}
-				x += dt * 60;
-				if (x >= 180) {
-					touch = false;
-				}
+			if (x < 180) {
+				_Particle._fSpread = 2 * sinf(x / (180 / M_PI));
+				_Particle.setFlower(time, x, FlowerPos, speedx);
+			}
+			x += dt * 60;
+			if (x >= 180) {
+				touch = false;
 			}
 		}
 		else {
