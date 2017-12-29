@@ -91,7 +91,9 @@ void CParticleSystem::doStep(float dt)
 			else it++;
 		}
 	}
-	
+	if (_bType3) {
+		onTouchesBegan(_TypePos); _fTypeTime += 600 * dt;
+	}
 }
 
 void CParticleSystem::setGravity(float fGravity)
@@ -157,7 +159,7 @@ void CParticleSystem::setFlower(float alltime, float time, cocos2d::Point loc, f
 				_fAngle = 180 + _fAngle;
 			if (alltime >= (dx / speed)) {
 				(*it)->setWind(1 * sinf((time / 2 + 90) / (180 / M_PI)), _fAngle);
-				//(*it)->setOpacity(255 - sinf(time / (180 / M_PI)) * 50);
+				_fSpread = 2 * sinf(time / (180 / M_PI));
 			}
 		}
 	}
@@ -219,7 +221,7 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 		break;
 	case Effect4:
 		// 從 _FreeList 取得一個分子給放到 _InUsed
-		if (_iFree > 100) {
+		if (_iFree > 75) {
 			for (int i = 0; i < 75; i++) {
 				get = _FreeList.front();
 				get->setSprite(_cSprite);
@@ -281,25 +283,26 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 		else return;// 沒有分子, 所以就不提供
 		break;
 	case OTHER_1:
-		if (_iFree > 150) {
-			for (int i = 0; i < 100; i++) {
-				get = _FreeList.front();
-				get->setSprite(_cSprite);
-				get->setBehavior(OTHER_1);
-				get->setPosition(touchPoint);
-				get->setGravity(_fGravity);
-				_FreeList.pop_front();
-				_InUsedList.push_front(get);
-				_iFree--; _iInUsed++;
-			}
+		if (_iFree != 0) {
+			get = _FreeList.front();
+			get->setSprite(Sprite_0);
+			get->_iTypeNumber = 0;
+			get->setBehavior(OTHER_1);
+			get->setPosition(touchPoint);
+			//get->setGravity(_fGravity);
+			_FreeList.pop_front();
+			_InUsedList.push_front(get);
+			_iFree--; _iInUsed++;
 		}
+		else return;
 		break;
 	case OTHER_2:
-		if (_iFree > 150) {
-			for (int i = 0; i < 100; i++) {
+		if (_iFree > 10) {
+			for (int i = 0; i < 10; i++) {
 				get = _FreeList.front();
 				get->setSprite(_cSprite);
-				get->setBehavior(OTHER_1);
+				get->_iTypeNumber = i;
+				get->setBehavior(OTHER_2);
 				get->setPosition(touchPoint);
 				get->setGravity(_fGravity);
 				_FreeList.pop_front();
@@ -307,20 +310,24 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 				_iFree--; _iInUsed++;
 			}
 		}
+		else return;
 		break;
 	case OTHER_3:
-		if (_iFree > 150) {
-			for (int i = 0; i < 100; i++) {
-				get = _FreeList.front();
-				get->setSprite(_cSprite);
-				get->setBehavior(OTHER_1);
-				get->setPosition(touchPoint);
-				get->setGravity(_fGravity);
-				_FreeList.pop_front();
-				_InUsedList.push_front(get);
-				_iFree--; _iInUsed++;
-			}
+		_bType3 = true;
+		if (_iFree != 0) {
+			get = _FreeList.front();
+			get->setSprite(_cSprite);
+			get->setBehavior(OTHER_3);
+			get->setColor(Color3B(_iRed, _iGreen, _iBlue));
+			get->_bTypeEnd = false;
+			_TypePos = touchPoint;
+			get->setPosition(Point(touchPoint.x, touchPoint.y + _fTypeTime));
+			get->setGravity(_fGravity);
+			_FreeList.pop_front();
+			_InUsedList.push_front(get);
+			_iFree--; _iInUsed++;
 		}
+		else return;
 		break;
 	}
 }
@@ -369,10 +376,78 @@ void CParticleSystem::onTouchesMoved(const cocos2d::CCPoint &touchPoint)
 		else return;// 沒有分子, 所以就不提供
 		break;
 	case OTHER_1:
+		if (_iFree != 0) {
+			get = _FreeList.front();
+			get->setSprite(Sprite_0);
+			get->_iTypeNumber = 0;
+			get->setBehavior(OTHER_1);
+			get->setPosition(touchPoint);
+			//get->setGravity(_fGravity);
+			_FreeList.pop_front();
+			_InUsedList.push_front(get);
+			_iFree--; _iInUsed++;
+		}
+		else return;
 		break;
 	case OTHER_2:
+		if (_iFree > 10) {
+			for (int i = 0; i < 10; i++) {
+				get = _FreeList.front();
+				get->setSprite(_cSprite);
+				get->setBehavior(OTHER_2);
+				get->setPosition(touchPoint);
+				get->setGravity(_fGravity);
+				_FreeList.pop_front();
+				_InUsedList.push_front(get);
+				_iFree--; _iInUsed++;
+			}
+		}
+		else return;
 		break;
 	case OTHER_3:
+		break;
+	}
+}
+void CParticleSystem::onTouchesEnded(const cocos2d::CCPoint &touchPoint)
+{
+	CParticle *get;
+	switch (_iType)
+	{
+	case OTHER_1:
+		if (_iFree > 160) {
+			for (int i = 0; i < 160; i++) {
+				get = _FreeList.front();
+				get->setSprite(Sprite_0);
+				get->_iTypeNumber = i + 1;
+				get->setBehavior(OTHER_1);
+				get->setPosition(touchPoint);
+				get->setWind(0, _fAngle);
+				//get->setGravity(_fGravity);
+				_FreeList.pop_front();
+				_InUsedList.push_front(get);
+				_iFree--; _iInUsed++;
+			}
+		}
+		else return;
+		break;
+	case OTHER_3:
+		_bType3 = false;
+		if (_iFree > 100) {
+			for (int i = 0; i < 100; i++) {
+				get = _FreeList.front();
+				get->setSprite(_cSprite);
+				get->_bTypeEnd = true;
+				get->setBehavior(OTHER_3_END);
+				get->setColor(Color3B(_iRed, _iGreen, _iBlue));
+				get->setPosition(Point(_TypePos.x, _TypePos.y + _fTypeTime));
+				get->setGravity(_fGravity);
+				_FreeList.pop_front();
+				_InUsedList.push_front(get);
+				_iFree--; _iInUsed++;
+			}
+			_fTypeTime = 0;
+		}
+		else return;
 		break;
 	}
 }

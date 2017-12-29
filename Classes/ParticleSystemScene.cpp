@@ -49,7 +49,7 @@ bool ParticleSystemScene::init()
 	rootNode->getChildByName("Sprite")->setVisible(false);
 	_bSpriteOn = false;
 	_bEffectsOn = false;
-	pos_back = Point(50, 670);
+	pos_back = Point(80, 670);
 	pos_none = Point(-200, -200);
 
 	//Button
@@ -121,28 +121,28 @@ bool ParticleSystemScene::init()
 	Point pos_fire = firework->getPosition();
 	firework->setVisible(false);
 	_FireworkBtn = CSwitchButton::create();
-	_FireworkBtn->setButtonInfo("emitteroff.png", "emitteron.png", "emittertd.png", pos_fire);
+	_FireworkBtn->setButtonInfo("firework.png", "back.png", "none.png", pos_fire);
 	this->rootNode->getChildByName("Effects")->addChild(_FireworkBtn, 2);
 
 	auto elve = (Sprite *)(rootNode->getChildByName("Effects")->getChildByName("Effect_2"));
 	Point pos_elve = elve->getPosition();
 	elve->setVisible(false);
 	_ElveBtn = CSwitchButton::create();
-	_ElveBtn->setButtonInfo("emitteroff.png", "emitteron.png", "emittertd.png", pos_elve);
+	_ElveBtn->setButtonInfo("elve.png", "back.png", "none.png", pos_elve);
 	this->rootNode->getChildByName("Effects")->addChild(_ElveBtn, 2);
 
 	auto Tornado = (Sprite *)(rootNode->getChildByName("Effects")->getChildByName("Effect_3"));
 	Point pos_Tornado = Tornado->getPosition();
 	Tornado->setVisible(false);
 	_TornadoBtn = CSwitchButton::create();
-	_TornadoBtn->setButtonInfo("emitteroff.png", "emitteron.png", "emittertd.png", pos_Tornado);
+	_TornadoBtn->setButtonInfo("wind.png", "back.png", "none.png", pos_Tornado);
 	this->rootNode->getChildByName("Effects")->addChild(_TornadoBtn, 2);
 
 	auto flower = (Sprite *)(rootNode->getChildByName("Effects")->getChildByName("Effect_4"));
 	Point pos_flower = flower->getPosition();
 	flower->setVisible(false);
 	_FlowerBtn = CSwitchButton::create();
-	_FlowerBtn->setButtonInfo("emitteroff.png", "emitteron.png", "emittertd.png", pos_flower);
+	_FlowerBtn->setButtonInfo("flower.png", "back.png", "none.png", pos_flower);
 	this->rootNode->getChildByName("Effects")->addChild(_FlowerBtn, 2);
 
 	_FireworkEffect.init(*this);
@@ -280,13 +280,13 @@ bool ParticleSystemScene::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *p
 	if (_bEmitterOn) {
 		_EmitterSprite->touchesBegan(touchLoc);
 	}
-	else {
+	else if(iType <= 5){
 		_FireworkBtn->touchesBegan(touchLoc);
 		_FlowerBtn->touchesBegan(touchLoc);
 		_TornadoBtn->touchesBegan(touchLoc);
 		_ElveBtn->touchesBegan(touchLoc);
 	}
-	if (!_bEffectsOn)_emitterSwitchBtn->touchesBegan(touchLoc);
+	if (!_bEffectsOn && iType <= 5)_emitterSwitchBtn->touchesBegan(touchLoc);
 	if (_bSpriteOn) {
 		_SparkBtn->touchesBegan(touchLoc);
 		_RaindropBtn->touchesBegan(touchLoc);
@@ -451,6 +451,7 @@ void  ParticleSystemScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *
 		}
 	}
 	_FlowerEffect.SetFlower(_FlowerBtn->getStatus(), touchLoc);
+	if (!_bEmitterOn && !_bEffectsOn) _ParticleControl.onTouchesEnded(touchLoc);
 }
 
 void ParticleSystemScene::GravityEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::EventType type)
@@ -621,9 +622,25 @@ void ParticleSystemScene::TypeEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::E
 		Slider* slider = dynamic_cast<Slider*>(sender);
 		int percent = slider->getPercent();
 		int maxPercent = slider->getMaxPercent();
-		int iType = percent / 12.5f; // 0 到 8 之間
+		iType = percent / 12.5f; // 0 到 8 之間
 		_TypeBMValue->setString(StringUtils::format("%2d", iType));
 		_ParticleControl.setType(iType);
 		_FireworkEffect.SetType(iType);
+		if (!_bEffectsOn) {
+			if (iType > 5) {
+				_bSpriteOn = true;
+				rootNode->getChildByName("Slider")->setVisible(true);
+				rootNode->getChildByName("Sprite")->setVisible(true);
+				rootNode->getChildByName("Effects")->setVisible(false);
+				rootNode->getChildByName("Emitter")->setVisible(false);
+			}
+			else {
+				_bSpriteOn = false;
+				rootNode->getChildByName("Slider")->setVisible(false);
+				rootNode->getChildByName("Sprite")->setVisible(false);
+				rootNode->getChildByName("Effects")->setVisible(true);
+				rootNode->getChildByName("Emitter")->setVisible(true);
+			}
+		}
 	}
 }

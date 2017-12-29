@@ -188,7 +188,7 @@ bool CParticle::doStep(float dt)
 			_Pos.y += (_Direction.y * cost * _fVelocity + tt)* dt * PIXEL_PERM;
 			_Particle->setPosition(_Pos);
 		}
-		break;
+		break; 
 	case OTHER_1:
 		if (!_bVisible && _fElapsedTime >= _fDelayTime) {
 			_fElapsedTime = _fElapsedTime - _fDelayTime; // 重新開始計時
@@ -203,15 +203,15 @@ bool CParticle::doStep(float dt)
 			return true; // 分子生命週期已經結束
 		}
 		else {
-			// 根據心型公式，計算每一個分子的終止位置
 			sint = sinf(M_PI*_fElapsedTime / _fLifeTime);
 			cost = cosf(M_PI_2*_fElapsedTime / _fLifeTime);
-			_Particle->setScale(1.25 + (1 - cost)*2.0);
+			//_Particle->setScale(1.25 + (1 - cost)*2.0);
+			_Particle->setScale(0.3f);
 			_Particle->setOpacity(_fOpacity * cost);
-			_Particle->setColor(_color);
-			_Pos.x += _Direction.x * cost * _fVelocity * dt * PIXEL_PERM;
-			float tt = GRAVITY_Y(_fElapsedTime, dt, _fGravity);
-			_Pos.y += (_Direction.y * cost * _fVelocity + tt)* dt * PIXEL_PERM;
+			//_Particle->setColor(_color);
+			_Particle->setColor(Color3B(255, 255, 255));
+			_Pos.x += (_Direction.x * _fVelocity) * dt * PIXEL_PERM;
+			_Pos.y += (_Direction.y * _fVelocity)* dt * PIXEL_PERM;
 			_Particle->setPosition(_Pos);
 		}
 		break;
@@ -229,15 +229,16 @@ bool CParticle::doStep(float dt)
 			return true; // 分子生命週期已經結束
 		}
 		else {
-			// 根據心型公式，計算每一個分子的終止位置
 			sint = sinf(M_PI*_fElapsedTime / _fLifeTime);
 			cost = cosf(M_PI_2*_fElapsedTime / _fLifeTime);
-			_Particle->setScale(1.25 + (1 - cost)*2.0);
+			_Particle->setScale(3.25 * cost);
 			_Particle->setOpacity(_fOpacity * cost);
-			_Particle->setColor(_color);
-			_Pos.x += _Direction.x * cost * _fVelocity * dt * PIXEL_PERM;
-			float tt = GRAVITY_Y(_fElapsedTime, dt, _fGravity);
-			_Pos.y += (_Direction.y * cost * _fVelocity + tt)* dt * PIXEL_PERM;
+			//_Particle->setColor(Color3B(INTENSITY(_color.r*(1 + sint)), INTENSITY(_color.g*(1 + sint)), INTENSITY(_color.b*(1 + sint))));
+			_Particle->setColor(Color3B(rand()% 101, 65, rand() % 256));
+			float wind_x = WIND_X(_fElapsedTime, dt, _fWind, _fWindDirection);
+			_Pos.x += (_Direction.x * _fVelocity + wind_x + 3 * sinf(rand() % 360)) * dt * PIXEL_PERM;
+			float wind_y = WIND_Y(_fElapsedTime, dt, _fWind, _fWindDirection);
+			_Pos.y += (_Direction.y * _fVelocity + wind_y)* dt * PIXEL_PERM;
 			_Particle->setPosition(_Pos);
 		}
 		break;
@@ -262,8 +263,32 @@ bool CParticle::doStep(float dt)
 			_Particle->setOpacity(_fOpacity * cost);
 			_Particle->setColor(_color);
 			_Pos.x += _Direction.x * cost * _fVelocity * dt * PIXEL_PERM;
-			float tt = GRAVITY_Y(_fElapsedTime, dt, _fGravity);
-			_Pos.y += (_Direction.y * cost * _fVelocity + tt)* dt * PIXEL_PERM;
+			_Pos.y += (_Direction.y * cost * _fVelocity)* dt * PIXEL_PERM;
+			_Particle->setPosition(_Pos);
+		}
+		break;
+	case OTHER_3_END:
+		if (!_bVisible && _fElapsedTime >= _fDelayTime) {
+			_fElapsedTime = _fElapsedTime - _fDelayTime; // 重新開始計時
+			_bVisible = true;
+			_Particle->setVisible(_bVisible);
+			_Particle->setColor(_color);
+			_Particle->setPosition(_Pos);
+		}
+		else if (_fElapsedTime > _fLifeTime) {
+			_bVisible = false;
+			_Particle->setVisible(_bVisible);
+			return true; // 分子生命週期已經結束
+		}
+		else {
+			// 根據心型公式，計算每一個分子的終止位置
+			sint = sinf(M_PI*_fElapsedTime / _fLifeTime);
+			cost = cosf(M_PI_2*_fElapsedTime / _fLifeTime);
+			_Particle->setScale(1.25 + (1 - cost)*2.0);
+			_Particle->setOpacity(_fOpacity * cost);
+			_Particle->setColor(_color);
+			_Pos.x += (_Direction.x * _fVelocity) * dt * PIXEL_PERM;
+			_Pos.y += (_Direction.y * _fVelocity)* dt * PIXEL_PERM;
 			_Particle->setPosition(_Pos);
 		}
 		break;
@@ -423,13 +448,30 @@ void CParticle::setBehavior(int iType)
 		_fGravity = 0;
 		break;
 	case OTHER_1:
-		_fVelocity = 15.0f;
+		_fVelocity = 3.0f;
+		_fLifeTime = 3.5f + LIFE_NOISE(0.15f);
 		t = 2.0f * M_PI * (rand() % 1000) / 1000.0f;
-		float cos5t;
-		sint = sinf(t);  cost = cosf(t); cos2t = cosf(2 * t); cos3t = cosf(3 * t); cos4t = cosf(4 * t); cos5t = cosf(5 * t);
-		_Direction.x = sint * cos5t;
-		_Direction.y = cost * cos5t;
-		_fLifeTime = 1.5f + LIFE_NOISE(0.15f);
+		float r;
+		r = 1.0f;
+		if (_iTypeNumber %10 < 5)r = 0.6f;
+		sint = sinf(t);  cost = cosf(t);
+		if (_iTypeNumber == 0) { _Direction.x = 0; _Direction.y = 0; _fLifeTime = 1.5f + LIFE_NOISE(0.15f);}
+		else if (_iTypeNumber < 10) { _Direction.x = 0; _Direction.y = sqrtf(powf(cost, 2)); }
+		else if (_iTypeNumber < 20) { _Direction.x = (-sqrtf(powf(sint*cost, 2)) + sqrtf(1.5) / 2)*r; _Direction.y = (-sqrtf(-powf(cost*sint, 2) + 0.5) + 1 + sqrtf(0.5) / 2)*r; }
+		else if (_iTypeNumber < 30) { _Direction.x = sqrtf(powf(sint*cost, 2) * 2); _Direction.y = sqrtf(powf(sint*cost, 2) * 2); }
+		else if (_iTypeNumber < 40) { _Direction.x = (-sqrtf(-powf(sint*cost, 2) + 0.5) + 1 + sqrtf(0.5) / 2)*r; _Direction.y = (-sqrtf(powf(cost*sint, 2)) + sqrtf(1.5) / 2)*r; }
+		else if (_iTypeNumber < 50) { _Direction.x = sqrtf(powf(sint, 2)); _Direction.y = 0; }
+		else if (_iTypeNumber < 60) { _Direction.x = (-sqrtf(-powf(sint*cost, 2) + 0.5) + 1 + sqrtf(0.5) / 2)*r; _Direction.y = (sqrtf(powf(cost*sint, 2)) - sqrtf(1.5) / 2)*r; }
+		else if (_iTypeNumber < 70) { _Direction.x = sqrtf(powf(sint*cost, 2) * 2); _Direction.y = -sqrtf(powf(sint*cost, 2) * 2); }
+		else if (_iTypeNumber < 80) { _Direction.x = (-sqrtf(powf(sint*cost, 2)) + sqrtf(1.5) / 2)*r; _Direction.y = (sqrtf(-powf(cost*sint, 2) + 0.5) - 1 - sqrtf(0.5) / 2)*r; }
+		else if (_iTypeNumber < 90) { _Direction.x = 0; _Direction.y = -sqrtf(powf(cost, 2)); }
+		else if (_iTypeNumber < 100) { _Direction.x = (sqrtf(powf(sint*cost, 2)) - sqrtf(1.5) / 2)*r; _Direction.y = (sqrtf(-powf(cost*sint, 2) + 0.5) - 1 - sqrtf(0.5) / 2)*r; }
+		else if (_iTypeNumber < 110) { _Direction.x = -sqrtf(powf(sint*cost, 2) * 2); _Direction.y = -sqrtf(powf(sint*cost, 2) * 2); }
+		else if (_iTypeNumber < 120) { _Direction.x = (sqrtf(-powf(sint*cost, 2) + 0.5) - 1 - sqrtf(0.5) / 2)*r; (_Direction.y = sqrtf(powf(cost*sint, 2)) - sqrtf(1.5) / 2)*r; }
+		else if (_iTypeNumber < 130) { _Direction.x = -sqrtf(powf(sint, 2)); _Direction.y = 0; }
+		else if (_iTypeNumber < 140) { _Direction.x = (sqrtf(-powf(sint*cost, 2) + 0.5) - 1 - sqrtf(0.5) / 2)*r; _Direction.y = (-sqrtf(powf(cost*sint, 2)) + sqrtf(1.5) / 2)*r; }
+		else if (_iTypeNumber < 150) { _Direction.x = -sqrtf(powf(sint*cost, 2) * 2); _Direction.y = sqrtf(powf(sint*cost, 2) * 2); }
+		else {_Direction.x = (sqrtf(powf(sint*cost, 2)) - sqrtf(1.5) / 2)*r; _Direction.y = (-sqrtf(-powf(cost*sint, 2) + 0.5) + 1 + sqrtf(0.5) / 2)*r; }
 		_fIntensity = 1;
 		_fOpacity = 255;
 		_fSpin = 0;
@@ -441,38 +483,57 @@ void CParticle::setBehavior(int iType)
 		_fGravity = 0;
 		break;
 	case OTHER_2:
-		_fVelocity = 3.5f;
+		if (_iTypeNumber < 3)_fVelocity = 0.5f + rand() % 10 / 10.0f;
+		else if (_iTypeNumber < 6)_fVelocity = 1.0f + rand() % 10 / 10.0f;
+		else _fVelocity = 1.5f + rand() % 10 / 10.0f;
 		t = 2.0f * M_PI * (rand() % 1000) / 1000.0f;
-		sint = sinf(t);  cost = cosf(t); cos2t = cosf(2 * t); cos3t = cosf(3 * t); cos4t = cosf(4 * t); sin12t = sin(t / 12.0f);
-		_Direction.x = sint * cost + sint - cost;
-		_Direction.y = cost * cost + cost;
-		_fLifeTime = 1.5f + LIFE_NOISE(0.15f);
+		sint = sinf(t);  cost = cosf(t);
+		_Direction.x = (rand() % 5) * sint * 0.1;
+		_Direction.y = 2.5f* sqrtf(powf(sint, 2));
+		_fLifeTime = 3.5f + LIFE_NOISE(0.15f);
 		_fIntensity = 1;
 		_fOpacity = 255;
 		_fSpin = 0;
 		_fSize = 1;
-		_color = Color3B(128 + rand() % 128, 128 + rand() % 128, 128 + rand() % 128);
-		//_color = Color3B(255, 255, 255);
+		_color = Color3B(64 + rand() % 128, 64 + rand() % 128, 64 + rand() % 128);
 		_fElapsedTime = 0;
-		_fDelayTime = rand() % 100 / 1000.0f;
+		_fDelayTime = 0;
 		_fGravity = 0;
+		_Particle->setOpacity(255);
+		_Particle->setScale(_fSize);
 		break;
 	case OTHER_3:
-		_fVelocity = 3.5f;
-		t = 2.0f * M_PI * (rand() % 1000) / 1000.0f;
-		sint = sinf(t);  cost = cosf(t); cos2t = cosf(2 * t); cos3t = cosf(3 * t); cos4t = cosf(4 * t); sin12t = sin(t / 12.0f);
-		_Direction.x = sint * cost + sint - cost;
-		_Direction.y = cost * cost + cost;
+		_fVelocity = 0;
+		_Direction.x = 0;
+		_Direction.y = 0;
 		_fLifeTime = 1.5f + LIFE_NOISE(0.15f);
 		_fIntensity = 1;
 		_fOpacity = 255;
 		_fSpin = 0;
 		_fSize = 1;
-		_color = Color3B(128 + rand() % 128, 128 + rand() % 128, 128 + rand() % 128);
-		//_color = Color3B(255, 255, 255);
+		_color = Color3B(64 + rand() % 128, 64 + rand() % 128, 64 + rand() % 128);
 		_fElapsedTime = 0;
-		_fDelayTime = rand() % 100 / 1000.0f;
+		_fDelayTime = 0;
 		_fGravity = 0;
+		_Particle->setOpacity(255);
+		_Particle->setScale(_fSize);
+		break;
+	case OTHER_3_END:
+		_fVelocity = 3.0f + rand() % 10 / 10.0f;
+		t = 2.0f * M_PI * (rand() % 1000) / 1000.0f;
+		_Direction.x = sinf(t) * cosf(5 * t);
+		_Direction.y = cosf(t) * cosf(5 * t);
+		_fLifeTime = 1.5f + LIFE_NOISE(0.15f);
+		_fIntensity = 1;
+		_fOpacity = 255;
+		_fSpin = 0;
+		_fSize = 1;
+		_color = Color3B(64 + rand() % 128, 64 + rand() % 128, 64 + rand() % 128);
+		_fElapsedTime = 0;
+		_fDelayTime = 0;
+		_fGravity = 0;
+		_Particle->setOpacity(255);
+		_Particle->setScale(_fSize);
 		break;
 	case EMITTER_DEFAULT:
 		_fIntensity = 1;

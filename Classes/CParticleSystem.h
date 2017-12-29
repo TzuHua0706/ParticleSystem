@@ -45,6 +45,10 @@ public:
 	float _fTime;
 	float _fAngle;
 
+	cocos2d::Point _TypePos;
+	bool _bType3 = false;
+	float _fTypeTime;
+
 	CParticleSystem();
 	~CParticleSystem();
 	void init(cocos2d::Layer &inlayer);
@@ -58,9 +62,9 @@ public:
 
 	void setFlower(float alltime, float time, cocos2d::Point loc, float speed);
 
- //   void onTouchesEnded(const cocos2d::CCPoint &touchPoint);
     void onTouchesBegan(const cocos2d::CCPoint &touchPoint);
-    void onTouchesMoved(const cocos2d::CCPoint &touchPoint);
+    void onTouchesMoved(const cocos2d::CCPoint &touchPoint); 
+	void onTouchesEnded(const cocos2d::CCPoint &touchPoint);
 
 };
 

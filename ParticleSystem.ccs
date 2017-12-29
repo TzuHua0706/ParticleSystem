@@ -20,6 +20,12 @@
           <PlistImageFile Name="sliderProgress.png" Key="sliderProgress.png" />
           <PlistImageFile Name="sliderTrack.png" Key="sliderTrack.png" />
           <PlistImageFile Name="spark.png" Key="spark.png" />
+          <PlistImageFile Name="flower.png" Key="flower.png" />
+          <PlistImageFile Name="back.png" Key="back.png" />
+          <PlistImageFile Name="none.png" Key="none.png" />
+          <PlistImageFile Name="elve.png" Key="elve.png" />
+          <PlistImageFile Name="wind.png" Key="wind.png" />
+          <PlistImageFile Name="firework.png" Key="firework.png" />
         </PlistImageFolder>
         <TTF Name="arial.ttf" />
         <Image Name="background.png" />

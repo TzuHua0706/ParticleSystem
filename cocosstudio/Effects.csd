@@ -6,10 +6,10 @@
       <ObjectData Name="Effects" Tag="3293" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="Firework" ActionTag="206070836" Tag="3358" IconVisible="False" LeftMargin="1104.7999" RightMargin="-1178.7999" TopMargin="-647.9742" BottomMargin="573.9742" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Firework" ActionTag="206070836" Tag="3358" IconVisible="False" LeftMargin="1104.8007" RightMargin="-1178.8007" TopMargin="-636.6296" BottomMargin="562.6296" ctype="SpriteObjectData">
             <Size X="74.0000" Y="74.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="1141.7999" Y="610.9742" />
+            <Position X="1141.8007" Y="599.6296" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
@@ -17,10 +17,10 @@
             <FileData Type="PlistSubImage" Path="emittericon1.png" Plist="particletexture.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Effect_2" ActionTag="-984037756" Tag="3487" IconVisible="False" LeftMargin="1104.7983" RightMargin="-1178.7983" TopMargin="-500.5635" BottomMargin="426.5635" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Effect_2" ActionTag="-984037756" Tag="3487" IconVisible="False" LeftMargin="1104.8011" RightMargin="-1178.8011" TopMargin="-468.8859" BottomMargin="394.8859" ctype="SpriteObjectData">
             <Size X="74.0000" Y="74.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="1141.7983" Y="463.5635" />
+            <Position X="1141.8011" Y="431.8859" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
@@ -28,10 +28,10 @@
             <FileData Type="PlistSubImage" Path="emittericon1.png" Plist="particletexture.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Effect_3" ActionTag="1922477524" Tag="3488" IconVisible="False" LeftMargin="1104.7983" RightMargin="-1178.7983" TopMargin="-353.1528" BottomMargin="279.1528" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Effect_3" ActionTag="1922477524" Tag="3488" IconVisible="False" LeftMargin="1104.8011" RightMargin="-1178.8011" TopMargin="-295.1423" BottomMargin="221.1423" ctype="SpriteObjectData">
             <Size X="74.0000" Y="74.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="1141.7983" Y="316.1528" />
+            <Position X="1141.8011" Y="258.1423" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
@@ -39,10 +39,10 @@
             <FileData Type="PlistSubImage" Path="emittericon1.png" Plist="particletexture.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Effect_4" ActionTag="-897869915" Tag="3489" IconVisible="False" LeftMargin="1104.7985" RightMargin="-1178.7985" TopMargin="-205.7421" BottomMargin="131.7421" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Effect_4" ActionTag="-897869915" Tag="3489" IconVisible="False" LeftMargin="1104.8010" RightMargin="-1178.8010" TopMargin="-133.3983" BottomMargin="59.3983" ctype="SpriteObjectData">
             <Size X="74.0000" Y="74.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="1141.7985" Y="168.7421" />
+            <Position X="1141.8010" Y="96.3983" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

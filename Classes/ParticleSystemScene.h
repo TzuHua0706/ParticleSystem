@@ -60,6 +60,9 @@ private:
 
 	cocos2d::Point pos_back;
 	cocos2d::Point pos_none;
+
+	int iType;
+
 public:
 
 	CParticleSystem _ParticleControl;

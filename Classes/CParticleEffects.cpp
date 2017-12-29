@@ -67,13 +67,16 @@ void CParticleEffects::doStep(float dt)
 	_Particle_2.doStep(dt);
 	if (FireworkOn) {
 		if (_Particle._emitterPt.y < FireworkPos.y + 500) {
+			_Particle._cSprite = Sprite_3;
 			_Particle._fSize = -0.5f;
 			_Particle._fVelocity = 0.5f;
 			_Particle._fLifeTime = 0.3f;
 			_Particle._emitterPt.y += 1200 * dt;
+			FireworkEnd = false;
 		}
 		else if(!FireworkEnd){
-			_Particle.setEmitter(false);
+			//_Particle.setEmitter(false);
+			_Particle._emitterPt = FireworkPos;
 			_Particle._cSprite = Sprite_0;
 			_Particle._fSize = 0.125f;
 			_Particle.setType(FireType);
@@ -137,7 +140,6 @@ void CParticleEffects::doStep(float dt)
 		if (dy < 0)dy = dy * -1;
 		if (touch) {
 			if (x < 180) {
-				_Particle._fSpread = 2 * sinf(x / (180 / M_PI));
 				_Particle.setFlower(time, x, FlowerPos, speedx);
 			}
 			x += dt * 60;
@@ -252,5 +254,6 @@ void CParticleEffects::SetWind(float wind) {
 }
 void CParticleEffects::SetType(int type) {
 	if (type < 3)FireType = 3;
-	else FireType = type;
+	else if (type < 6)FireType = type;
+	else FireType = 3;
 }

@@ -6,11 +6,13 @@
 #define FREE_FLY 2				// 在手指滑過的地方任意向四方產生 particle
 #define EXPLOSION 3				// 噴射出圓形的煙火
 #define HEARTSHAPE 4			// 噴射出心型的煙火
-#define BUTTERFLYSHAPE	5		// 噴射出蝴蝶外型的煙火
-#define OTHER_1	6
+#define BUTTERFLYSHAPE 5		// 噴射出蝴蝶外型的煙火
+#define OTHER_1 6
 #define OTHER_2	7
 #define OTHER_3	8
 #define Effect4	9
+
+#define OTHER_3_END	10
 
 #define Sprite_0 "flare.png"
 #define Sprite_1 "bubble.png"
@@ -47,11 +49,13 @@ private:
 	int _iType;
 	// 顯示與否
 	bool _bVisible;
-
 public:
 	cocos2d::Point  _Pos;			// 分子目前的位置
 	CParticle();
 	void setParticle(const char *pngName, cocos2d::Layer &inlayer);
+
+	int _iTypeNumber;
+	bool _bTypeEnd = false;
 
 	bool doStep(float dt);
 	void setPosition(const cocos2d::Point &inPos);
