@@ -56,6 +56,7 @@ public:
 
 	int _iTypeNumber;
 	bool _bTypeEnd = false;
+	float _bTypeSize = 1.0f;
 
 	bool doStep(float dt);
 	void setPosition(const cocos2d::Point &inPos);

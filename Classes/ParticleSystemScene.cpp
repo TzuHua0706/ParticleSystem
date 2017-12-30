@@ -135,7 +135,7 @@ bool ParticleSystemScene::init()
 	Point pos_Tornado = Tornado->getPosition();
 	Tornado->setVisible(false);
 	_TornadoBtn = CSwitchButton::create();
-	_TornadoBtn->setButtonInfo("wind.png", "back.png", "none.png", pos_Tornado);
+	_TornadoBtn->setButtonInfo("water.png", "back.png", "none.png", pos_Tornado);
 	this->rootNode->getChildByName("Effects")->addChild(_TornadoBtn, 2);
 
 	auto flower = (Sprite *)(rootNode->getChildByName("Effects")->getChildByName("Effect_4"));
@@ -371,7 +371,6 @@ void  ParticleSystemScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *
 	//¯S®Ä
 	_FireworkEffect.SetFirework(_FireworkBtn->getStatus(), touchLoc);
 	_ElveEffect.SetElve(_ElveBtn->getStatus(), touchLoc);
-	_TornadoEffect.SetTornado(_TornadoBtn->getStatus(), touchLoc);
 	if (!_bEmitterOn) {
 		if (_FireworkBtn->touchesEnded(touchLoc)) {
 			_bEffectsOn = _FireworkBtn->getStatus();
@@ -450,6 +449,7 @@ void  ParticleSystemScene::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *
 			}
 		}
 	}
+	_TornadoEffect.SetTornado(_TornadoBtn->getStatus(), touchLoc);
 	_FlowerEffect.SetFlower(_FlowerBtn->getStatus(), touchLoc);
 	if (!_bEmitterOn && !_bEffectsOn) _ParticleControl.onTouchesEnded(touchLoc);
 }

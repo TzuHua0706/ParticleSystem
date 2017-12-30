@@ -304,7 +304,8 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 				get->_iTypeNumber = i;
 				get->setBehavior(OTHER_2);
 				get->setPosition(touchPoint);
-				get->setGravity(_fGravity);
+				//get->setGravity(_fGravity);
+				get->setWind(_fWind, _fWindDirection);
 				_FreeList.pop_front();
 				_InUsedList.push_front(get);
 				_iFree--; _iInUsed++;
@@ -316,6 +317,7 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 		_bType3 = true;
 		if (_iFree != 0) {
 			get = _FreeList.front();
+			get->_bTypeSize = _fTypeTime * 0.005;
 			get->setSprite(_cSprite);
 			get->setBehavior(OTHER_3);
 			get->setColor(Color3B(_iRed, _iGreen, _iBlue));
@@ -323,6 +325,7 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 			_TypePos = touchPoint;
 			get->setPosition(Point(touchPoint.x, touchPoint.y + _fTypeTime));
 			get->setGravity(_fGravity);
+			get->setWind(_fWind, _fWindDirection);
 			_FreeList.pop_front();
 			_InUsedList.push_front(get);
 			_iFree--; _iInUsed++;
@@ -396,7 +399,8 @@ void CParticleSystem::onTouchesMoved(const cocos2d::CCPoint &touchPoint)
 				get->setSprite(_cSprite);
 				get->setBehavior(OTHER_2);
 				get->setPosition(touchPoint);
-				get->setGravity(_fGravity);
+				//get->setGravity(_fGravity);
+				get->setWind(_fWind, _fWindDirection);
 				_FreeList.pop_front();
 				_InUsedList.push_front(get);
 				_iFree--; _iInUsed++;
@@ -435,12 +439,14 @@ void CParticleSystem::onTouchesEnded(const cocos2d::CCPoint &touchPoint)
 		if (_iFree > 100) {
 			for (int i = 0; i < 100; i++) {
 				get = _FreeList.front();
+				get->_bTypeSize = _fTypeTime * 0.01;
 				get->setSprite(_cSprite);
 				get->_bTypeEnd = true;
 				get->setBehavior(OTHER_3_END);
 				get->setColor(Color3B(_iRed, _iGreen, _iBlue));
 				get->setPosition(Point(_TypePos.x, _TypePos.y + _fTypeTime));
 				get->setGravity(_fGravity);
+				get->setWind(_fWind, _fWindDirection);
 				_FreeList.pop_front();
 				_InUsedList.push_front(get);
 				_iFree--; _iInUsed++;

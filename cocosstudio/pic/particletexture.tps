@@ -245,6 +245,7 @@
             </struct>
             <key type="filename">elve.png</key>
             <key type="filename">firework.png</key>
+            <key type="filename">water.png</key>
             <key type="filename">wind.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -311,6 +312,7 @@
             <filename>elve.png</filename>
             <filename>wind.png</filename>
             <filename>firework.png</filename>
+            <filename>water.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -114,20 +114,64 @@ void CParticleEffects::doStep(float dt)
 		}
 	}
 	else if (TornadoOn) {
-		_Particle._cSprite = Sprite_5;
-		_Particle_2._cSprite = Sprite_3;
-		_Particle._fVelocity = 1.0f;
-		_Particle_2._fVelocity = 1.2f;
+		if (touch) {
+			if (_Particle._emitterPt.y > 100) {
+				_Particle._fSize = -1.5f;
+				_Particle._fVelocity = 0;
+				_Particle.setGravity(dt);
+				_Particle._iOpacity = 150;
+				_Particle._fLifeTime = 1.0f * 120 * dt;
+				_Particle._emitterPt.y -= dt * 120;
+			}
+			else{
+				_Particle_2.setEmitter(true);
+				_Particle_2._cSprite = Sprite_1;
+				_Particle_2._fSize = -1.0f;
+				_Particle_2._iOpacity = 200;
+				_Particle_2._fLifeTime = 1.0f;
+				_Particle_2._fVelocity = 5;
+				_Particle_2.setGravity(10);
+				time += dt * 60;
+				if (time > 8) {
+					touch = false;
+					_Particle_2.setEmitter(false);
+					time = 0;
+				}
+			}
+		}
+		else {
+			_Particle._cSprite = Sprite_1;
+			_Particle._fVelocity = 0;
+			_Particle.setGravity(-10);
+			_Particle._iOpacity = 150;
+			_Particle._fLifeTime = 1.3f;
+			_Particle._fSize = -1.0f;
+			_Particle._emitterPt = Point(400, 680);
+		}
+
+		/*_Particle._cSprite = Sprite_5;
+		_Particle._fVelocity = 0;
 		_Particle._fSpread = 0;
-		_Particle_2._fSpread = 100;
-		_Particle._fDir += 1500 * dt;
-		_Particle._fWindDirection = 90;
+		_Particle._fDir += 3000 * dt;
+		_Particle._fWindDirection = 0;
 		_Particle._fWind = 10;
-		/*_Particle_2._fWindDirection = 0;
-		_Particle_2._fWind = 1;*/
-		_Particle._fSpin = 15;
-		_Particle._fLifeTime = 3.5;
-		_Particle_2._fLifeTime = 7;
+		_Particle._fSpin = 120;
+		_Particle._fLifeTime = 7.0f;*/
+		
+		//_Particle._cSprite = Sprite_5;
+		//_Particle_2._cSprite = Sprite_3;
+		//_Particle._fVelocity = 1.0f;
+		//_Particle_2._fVelocity = 1.2f;
+		//_Particle._fSpread = 0;
+		//_Particle_2._fSpread = 100;
+		//_Particle._fDir += 1500 * dt;
+		//_Particle._fWindDirection = 90;
+		//_Particle._fWind = 10;
+		///*_Particle_2._fWindDirection = 0;
+		//_Particle_2._fWind = 1;*/
+		//_Particle._fSpin = 15;
+		//_Particle._fLifeTime = 3.5;
+		//_Particle_2._fLifeTime = 7;
 	}
 	else if (FlowerOn) {
 		_Particle._fSpread = 0;
@@ -182,13 +226,21 @@ void CParticleEffects::SetTornado(bool bEm, cocos2d::Point loc) {
 	TornadoEnd = false;
 	if (!TornadoVisible) {
 		_Particle._iNumParticles = 50;
-		_Particle._emitterPt = Point(400, 50);
+		_Particle._fSize = 0.5f;
+		_Particle._emitterPt = Point(400, 680);
 		_Particle.setEmitter(bEm);
-		_Particle_2._iNumParticles = 35;
+		_Particle_2._emitterPt = Point(400, 100);
+		/*_Particle_2._iNumParticles = 50;
+		_Particle_2._emitterPt = Point(950, 360);
+		_Particle_2.setEmitter(bEm);*/
+		/*_Particle_2._iNumParticles = 35;
 		_Particle_2._iOpacity = 150;
 		_Particle_2._emitterPt = Point(400, 50);
-		_Particle_2.setEmitter(bEm);
+		_Particle_2.setEmitter(bEm);*/
 		TornadoVisible = true;
+	}
+	else {
+		touch = true;
 	}
 	TornadoOn = bEm;
 }
