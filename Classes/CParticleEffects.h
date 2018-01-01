@@ -35,6 +35,9 @@ private:
 	float speedx;
 	float speedy;
 	float time;
+	bool Particle_Pt = false;
+	float GetWind;
+	float GetWindDir;
 public:
 	CParticleEffects();
 	~CParticleEffects();

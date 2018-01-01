@@ -599,6 +599,7 @@ void ParticleSystemScene::WindDirectionEvent(cocos2d::Ref* sender, cocos2d::ui::
 		_WindDirectionBMValue->setString(StringUtils::format("%2.1f", fWindDir));
 		_ParticleControl.setWindDirection(fWindDir);
 		_FireworkEffect.SetWindDirection(fWindDir);
+		_TornadoEffect.SetWindDirection(fWindDir);
 	}
 }
 
@@ -612,6 +613,7 @@ void ParticleSystemScene::WindEvent(cocos2d::Ref* sender, cocos2d::ui::Slider::E
 		_WindBMValue->setString(StringUtils::format("%2.1f", fWind));
 		_ParticleControl.setWind(fWind);
 		_FireworkEffect.SetWind(fWind);
+		_TornadoEffect.SetWind(fWind);
 	}
 }
 

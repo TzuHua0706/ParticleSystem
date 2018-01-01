@@ -66,6 +66,9 @@ void CParticleEffects::doStep(float dt)
 	_Particle.doStep(dt); 
 	_Particle_2.doStep(dt);
 	if (FireworkOn) {
+		if (Particle_Pt) {
+			_Particle._emitterPt.x += GetWind*(cosf(GetWindDir / (180 / M_PI)));
+		}
 		if (_Particle._emitterPt.y < FireworkPos.y + 500) {
 			_Particle._cSprite = Sprite_3;
 			_Particle._fSize = -0.5f;
@@ -76,11 +79,11 @@ void CParticleEffects::doStep(float dt)
 		}
 		else if(!FireworkEnd){
 			//_Particle.setEmitter(false);
-			_Particle._emitterPt = FireworkPos;
 			_Particle._cSprite = Sprite_0;
 			_Particle._fSize = 0.125f;
 			_Particle.setType(FireType);
-			_Particle.onTouchesBegan(Point(FireworkPos.x, FireworkPos.y + 500));
+			_Particle.onTouchesBegan(Point(_Particle._emitterPt.x, _Particle._emitterPt.y));
+			_Particle._emitterPt = FireworkPos;
 			FireworkEnd = true;
 		}
 	}
@@ -114,39 +117,33 @@ void CParticleEffects::doStep(float dt)
 		}
 	}
 	else if (TornadoOn) {
-		if (touch) {
-			if (_Particle._emitterPt.y > 100) {
-				_Particle._fSize = -1.5f;
-				_Particle._fVelocity = 0;
-				_Particle.setGravity(dt);
-				_Particle._iOpacity = 150;
-				_Particle._fLifeTime = 1.0f * 120 * dt;
-				_Particle._emitterPt.y -= dt * 120;
-			}
-			else{
-				_Particle_2.setEmitter(true);
-				_Particle_2._cSprite = Sprite_1;
-				_Particle_2._fSize = -1.0f;
-				_Particle_2._iOpacity = 200;
-				_Particle_2._fLifeTime = 1.0f;
-				_Particle_2._fVelocity = 5;
-				_Particle_2.setGravity(10);
-				time += dt * 60;
-				if (time > 8) {
-					touch = false;
-					_Particle_2.setEmitter(false);
-					time = 0;
-				}
-			}
+		if (Particle_Pt) {
+			_Particle._emitterPt.x += GetWind*(cosf(GetWindDir / (180 / M_PI)));
+		}
+		if (_Particle._emitterPt.y > 100) {
+			_Particle._cSprite = Sprite_1;
+			_Particle._fSize = -1.5f;
+			_Particle._fVelocity = 0;
+			_Particle.setGravity(dt);
+			_Particle._iOpacity = 150;
+			_Particle._fLifeTime = 1.0f * 120 * dt;
+			_Particle._emitterPt.y -= dt * 120;
 		}
 		else {
-			_Particle._cSprite = Sprite_1;
-			_Particle._fVelocity = 0;
-			_Particle.setGravity(-10);
-			_Particle._iOpacity = 150;
-			_Particle._fLifeTime = 1.3f;
-			_Particle._fSize = -1.0f;
-			_Particle._emitterPt = Point(400, 680);
+			_Particle_2.setEmitter(true);
+			_Particle_2._cSprite = Sprite_1;
+			_Particle_2._fSize = -1.0f;
+			_Particle_2._iOpacity = 255;
+			_Particle_2._fLifeTime = 1.0f;
+			_Particle_2._fVelocity = 5;
+			_Particle_2.setGravity(10);
+			time += dt * 60;
+			if (time > 8) {
+				touch = false;
+				_Particle_2.setEmitter(false);
+				_Particle._emitterPt = Point(400, 680);
+				time = 0;
+			}
 		}
 
 		/*_Particle._cSprite = Sprite_5;
@@ -183,15 +180,15 @@ void CParticleEffects::doStep(float dt)
 		if (dx < 0)dx = dx * -1;
 		if (dy < 0)dy = dy * -1;
 		if (touch) {
-			if (x < 180) {
-				_Particle.setFlower(time, x, FlowerPos, speedx);
+			if (time >= ((dx-250) / speedx)) {
+				if (x < 180) {
+					_Particle.setFlower(time, x, FlowerPos, speedx);
+				}
+				x += dt * 60;
+				if (x >= 180) {
+					touch = false;
+				}
 			}
-			x += dt * 60;
-			if (x >= 180) {
-				touch = false;
-			}
-		}
-		else {
 		}
 	}
 	else {
@@ -226,7 +223,6 @@ void CParticleEffects::SetTornado(bool bEm, cocos2d::Point loc) {
 	TornadoEnd = false;
 	if (!TornadoVisible) {
 		_Particle._iNumParticles = 50;
-		_Particle._fSize = 0.5f;
 		_Particle._emitterPt = Point(400, 680);
 		_Particle.setEmitter(bEm);
 		_Particle_2._emitterPt = Point(400, 100);
@@ -300,9 +296,12 @@ void CParticleEffects::SetColorB(int B) {
 }
 void CParticleEffects::SetWindDirection(float winddirection) {
 	_Particle.setWindDirection(winddirection);
+	GetWindDir = winddirection;
 }
 void CParticleEffects::SetWind(float wind) {
-	_Particle.setWind(wind);
+	_Particle.setWind(wind); 
+	Particle_Pt = true;
+	GetWind = wind;
 }
 void CParticleEffects::SetType(int type) {
 	if (type < 3)FireType = 3;
