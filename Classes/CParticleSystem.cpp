@@ -243,6 +243,7 @@ void CParticleSystem::onTouchesBegan(const cocos2d::CCPoint &touchPoint)
 				get->setBehavior(EXPLOSION);
 				get->setPosition(touchPoint);
 				get->setGravity(_fGravity);
+				get->setWind(_fWind, _fWindDirection);
 				_FreeList.pop_front();
 				_InUsedList.push_front(get);
 				_iFree--; _iInUsed++;

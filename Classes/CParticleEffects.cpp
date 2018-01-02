@@ -67,7 +67,7 @@ void CParticleEffects::doStep(float dt)
 	_Particle_2.doStep(dt);
 	if (FireworkOn) {
 		if (Particle_Pt) {
-			_Particle._emitterPt.x += GetWind*(cosf(GetWindDir / (180 / M_PI)));
+			_Particle._emitterPt.x += GetWind*dt*60*(cosf(GetWindDir / (180 / M_PI)));
 		}
 		if (_Particle._emitterPt.y < FireworkPos.y + 500) {
 			_Particle._cSprite = Sprite_3;
